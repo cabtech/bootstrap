@@ -5,13 +5,15 @@ base=$( cd $(dirname $0)/.. && pwd -P)
 do_cloudflare=false
 do_core=false
 do_docker=false
+do_force=false
 do_hashicorp=false
 do_kubernetes=false
 do_yubikey=false
 
-while getopts Aacdhky arg; do
+while getopts AFacdhky arg; do
 	case $arg in
 		A) do_core=true;do_docker=true;do_hashicorp=true;do_kubernetes=true;do_yubikey=true;;
+		F) do_force=true;;
 		a) do_hashicorp=true;;
 		c) do_core=true;;
 		d) do_docker=true;;
@@ -35,7 +37,9 @@ if $do_core; then
 #	sudo apt install --yes yubico-piv-tool yubico-piv-tool-devel python3-yubico pam_yubico
 	sudo apt install --yes rustc cargo
 
-	cp ${base}/etc/misc/*-repos.cfg ~/etc/misc
+	if $do_force; then
+		/bin/cp ${base}/etc/*.sh ~/etc/bash.d
+	fi
 
 	grep -q BOOTSTRAP ~/.bashrc
 	if (($?!=0)); then
@@ -46,12 +50,13 @@ if $do_core; then
 
 	if [[ ! -r ~/.ssh/cfg.d/000.cfg ]]; then
 		echo "StrictHostKeyChecking=false" > ~/.ssh/cfg.d/000.cfg
-		chmod 400 ~/.ssh/cfg.d/000.cf
+		chmod 400 ~/.ssh/cfg.d/000.cfg
 	fi
 
-	chmod 600 ~/.ssh/config
-	cat ~/.ssh/cfg.d/* > ~/.ssh/config
-	chmod 400 ~/.ssh/config
+	if [[ ! -r ~/.ssh/config ]]; then
+		cat ~/.ssh/cfg.d/*.cfg > ~/.ssh/config
+		chmod 400 ~/.ssh/config
+	fi
 fi
 
 # --------------------------------
