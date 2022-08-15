@@ -38,7 +38,7 @@ if $do_core; then
 	sudo apt install --yes rustc cargo
 
 	if $do_force; then
-		/bin/cp ${base}/etc/*.sh ~/etc/bash.d
+		/bin/cp ${base}/etc/bash.d/*.sh ~/etc/bash.d
 	fi
 
 	grep -q BOOTSTRAP ~/.bashrc
