@@ -18,9 +18,6 @@ function handy {
 
 # --------------------------------
 
-export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\] "
-export PATH=${PATH}:~/bin
-
 alias senv='env | sort'
 alias    h='history|tail -20'
 alias  h50='history|tail -50'
@@ -39,6 +36,7 @@ alias     vh='vi handy'
 alias  qbin='cd ~/bin'
 alias  qetc='cd ~/etc'
 alias  qsrc='cd ~/src'
+alias  qtmp='cd ~/tmp'
 alias qwork='cd ~/work'
 
 alias up1='cd ..'
@@ -57,5 +55,10 @@ alias j2="cd ${_m2}"
 alias m2='_m2=$(pwd)'
 alias j3="cd ${_m3}"
 alias m3='_m3=$(pwd)'
+
+# --------------------------------
+
+export PATH=${PATH}:~/bin
+export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\] "
 
 # --------------------------------

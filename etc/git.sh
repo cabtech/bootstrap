@@ -1,3 +1,5 @@
+# --------------------------------
+
 alias      ga='git add'
 alias      gb='git branch'
 alias     gbr='git branch -r'
@@ -20,3 +22,5 @@ alias    gruo='git remote update origin'
 alias   gruop='git remote update origin --prune'
 alias      gt='git tag'
 alias     gtt='git tag | tail -8'
+
+# --------------------------------

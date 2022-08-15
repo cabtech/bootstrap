@@ -1,3 +1,5 @@
+# --------------------------------
+
 alias      tf='terraform'
 alias tfapply='terraform apply PLAN'
 alias   tffmt='terraform fmt'
@@ -13,3 +15,5 @@ alias lltfx='_ls -l *.tf *.tfx'
 if [[ -d /var/lib/terraform/plugins ]]; then
 	export TF_PLUGIN_CACHE_DIR=/var/lib/terraform/plugins
 fi
+
+# --------------------------------
