@@ -1,0 +1,8 @@
+colo desert
+set tabstop=4
+set softtabstop=4
+set noautoindent
+set nohlsearch
+filetype plugin on
+filetype plugin indent on
+autocmd FileType python setlocal autoindent expandtab shiftwidth=4 softtabstop=4 tabstop=4

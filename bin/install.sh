@@ -57,6 +57,15 @@ if $do_core; then
 		cat ~/.ssh/cfg.d/*.cfg > ~/.ssh/config
 		chmod 400 ~/.ssh/config
 	fi
+
+	if [[ ! -r ~/.vimrc ]]; then
+		/bin/cp ${base}/etc/vim/dot_vimrc ~/.vimrc
+	fi
+
+	if [[ ! -d ~/.vim/ftplugin ]]; then
+		mkdir -p ~/.vim/ftplugin
+		/bin/cp ${base}/etc/vim/ftplugin/* ~/.vim/ftplugin
+	fi
 fi
 
 # --------------------------------
