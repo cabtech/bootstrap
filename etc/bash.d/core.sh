@@ -16,6 +16,10 @@ function handy {
 	grep ${1:-wibble} ~/etc/misc/handy
 }
 
+function sshgrep {
+	grep -i ${1:-wibble} ~/.ssh/config
+}
+
 # --------------------------------
 
 alias senv='env | sort'
