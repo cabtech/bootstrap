@@ -20,6 +20,14 @@ function sshgrep {
 	grep -i ${1:-wibble} ~/.ssh/config
 }
 
+function hist {
+	history | grep -i "${1:-wibble}"
+}
+
+function slide {
+	cd $(pwd | sed s=/$1=/$2=)
+}
+
 # --------------------------------
 
 alias senv='env | sort'
