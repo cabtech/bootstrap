@@ -31,8 +31,8 @@ if $do_core; then
 	mkdir -p ~/.ssh/cfg.d ~/etc/bash.d ~/etc/misc
 	chmod 700 ~/.ssh ~/etc 
 
-	sudo apt update
-	sudo apt install --yes apt-transport-https awscli ca-certificates coreutils curl git gnupg2 jq net-tools oathtool open-vm-tools pip python3 vim virtualenv whois wget
+	sudo apt update --yes
+	sudo apt install --yes apt-transport-https awscli ca-certificates coreutils curl git gnupg2 jq net-tools oathtool open-vm-tools pip python3 python3-virtualenv vim virtualenv whois wget
 #	sudo apt install --yes gnupg2 gnupg-agent dirmngr cryptsetup scdaemon pcscd secure-delete hopenpgp-tools yubikey-personalization
 #	sudo apt install --yes yubico-piv-tool yubico-piv-tool-devel python3-yubico pam_yubico
 	sudo apt install --yes rustc cargo
