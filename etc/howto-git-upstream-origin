@@ -1,0 +1,14 @@
+cat << ENDCAT
+
+git remove -v
+git remote add upstream https://github.com/cabtech/ansible-role-hashicorp-consul.git
+git remote set-url --push upstream no_push
+git remove -v
+git fetch upstream master
+git merge --allow-unrelated-histories upstream/master
+# fix conflict, probably on README
+git add README.md
+git commit
+git push origin main
+
+ENDCAT
