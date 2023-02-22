@@ -4,4 +4,4 @@ alias cgoc='cargo check'
 alias cgor='cargo run'
 
 alias    clippy='cargo clippy'
-alias clippyall='cargo clippy --all -- -D warning'
+alias clippyall='cargo clippy --all -- -D warnings'
