@@ -17,14 +17,14 @@ alias  gpgd="gpg --decrypt"
 alias gpglk="gpg --list-keys"
 
 # to trust a key
-# gpg --edit-key tim@fifthrowtech.com
+# gpg --edit-key tim.short@example.com
 # > trust
 # > 5
 # > y
 # > save
 
 # gpg --gen-key
-# gpg --encrypt --output NAME.gpg --recipient myEmailAdddress < NAME.cfg
+# gpg --armor --encrypt --output NAME.gpg --recipient tim.short@example.com < NAME.cfg
 # gpgconf
 # gpgconf --kill gpg-agent
 # gpgconf --list-dir
