@@ -3,6 +3,7 @@ ansible-core==2.13.7
 ansible-lint
 cffi
 cryptography
+flake8
 Jinja2
 MarkupSafe
 packaging
