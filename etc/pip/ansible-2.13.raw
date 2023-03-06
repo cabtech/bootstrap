@@ -1,0 +1,12 @@
+ansible
+ansible-core==2.13.7
+ansible-lint
+cffi
+cryptography
+Jinja2
+MarkupSafe
+packaging
+pycparser
+PyYAML
+resolvelib
+yamllint
