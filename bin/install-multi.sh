@@ -6,15 +6,13 @@ do_cloudflare=false
 do_core=false
 do_docker=false
 do_force=false
-do_hashicorp=false
 do_kubernetes=false
 do_yubikey=false
 
-while getopts AFacdhky arg; do
+while getopts AFcdhky arg; do
 	case $arg in
-		A) do_core=true;do_docker=true;do_hashicorp=true;do_kubernetes=true;do_yubikey=true;;
+		A) do_core=true;do_docker=true;do_kubernetes=true;do_yubikey=true;;
 		F) do_force=true;;
-		a) do_hashicorp=true;;
 		c) do_core=true;;
 		d) do_docker=true;;
 		h) echo "no help"; exit 0;;
@@ -81,27 +79,6 @@ if $do_docker; then
 	fi
 	sudo apt-get install --yes docker-ce docker-ce-cli containerd.io docker-compose-plugin
 	sudo usermod -a -G docker $USER
-fi
-
-# --------------------------------
-
-if $do_hashicorp; then
-	hashicorp_apt=/etc/apt/sources.list.d/hashicorp.list
-	hashicorp_gpg=/usr/share/keyrings/hashicorp-archive-keyring.gpg
-
-	if [[ ! -f ${hashicorp_gpg} ]]; then
-		wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee $hashicorp_gpg > /dev/null
-	fi
-	if [[ ! -f ${hashicorp_apt} ]]; then
-		echo "deb [signed-by=$hashicorp_gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee $hashicorp_apt
-		sudo apt update
-	fi
- 	sudo apt install consul nomad terraform vault
-	sudo mkdir -p /var/lib/terraform/plugins
-	sudo chmod 755 /var/lib/terraform
-	sudo chmod 777 /var/lib/terraform/plugins
-
-	echo "# MANUAL create ~/.terraformrc"
 fi
 
 # --------------------------------
