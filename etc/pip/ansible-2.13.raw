@@ -1,6 +1,7 @@
 ansible
 ansible-core==2.13.7
 ansible-lint
+boto3
 cffi
 cryptography
 flake8
