@@ -87,13 +87,4 @@ export LC_COLLATE=C
 
 umask 0022
 
-alias alint='ansible-lint'
-alias f8='flake8 --ignore=E501'
-alias use-checkov="source ~/work/venvs/checkov/bin/activate"
-alias use-ansible="source ~/work/venvs/ans3/bin/activate"
-alias galaxy="ansible-galaxy install -r requirements.yml -p roles/galaxy"
-# alias collections="ansible-galaxy collection list"
-
-alias qshared="cd /mnt/hgfs/shared"
-
 # --------------------------------
