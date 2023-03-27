@@ -24,7 +24,7 @@ alias   gruop='git remote update origin --prune'
 alias      gs='git status'
 alias     gsd='git status .'
 alias      gt='git tag'
-alias     gtt='git tag | sort -n | tail -8'
+alias     gtt='git tag | sort -V | tail -8'
 
 # git remote set-url --push upstream no_push
 
