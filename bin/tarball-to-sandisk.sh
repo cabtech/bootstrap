@@ -5,7 +5,7 @@ mkdir -p $target
 
 tmpdir=/mnt/hgfs/shared/tmp/$(hostname)
 mkdir -p $tmpdir
-excludes="--exclude=.local --exclude=.cache --exclude=.docker --exclude=.config --exclude=venv/ --exclude=venvs/ --exclude=.git"
+excludes="--exclude=.cache --exclude=.config --exclude=.docker --exclude=.git --exclude=.local --exclude=.mozilla --exclude=venv/ --exclude=venvs/"
 rsync -a ${excludes} /home/tim ${tmpdir}
 
 timestamp=$(date +%Y%m%d)
