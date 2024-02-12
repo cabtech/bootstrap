@@ -1,5 +1,7 @@
 #!/bin/bash
 
+base=$(cd $(dirname $0)/.. && pwd)
+
 target=~/src/cabtech
 mkdir -p $target
 cd $target
@@ -10,10 +12,15 @@ git clone https://github.com/cabtech/terraform-scripts.git
 target=~/work/cabtech
 mkdir -p $target
 cd $target
-if false; then
 git clone git@github.com:cabtech/ansible-scripts.git
 git clone git@github.com:cabtech/bootstrap.git
 git clone git@github.com:cabtech/terraform-scripts.git
-fi
+
+target=~/work/cabtech/roles
+mkdir -p $target
+cd $target
+for role in $(cat $base/etc/cabtech-roles.cfg); do
+git clone git@github.com:cabtech/${role}.git
+done
 
 exit 0
