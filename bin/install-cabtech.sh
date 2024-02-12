@@ -23,4 +23,6 @@ for role in $(cat $base/etc/cabtech-roles.cfg); do
 git clone git@github.com:cabtech/${role}.git
 done
 
+~/src/cabtech/ansible-scripts/bin/ct-mkssh.sh -dx
+
 exit 0
