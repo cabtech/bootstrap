@@ -1,0 +1,13 @@
+---
+extends: default
+
+ignore: roles/galaxy/ansible-role-postgresql
+
+rules:
+  line-length:
+    level: warning
+    max: 1024
+  indentation:
+    spaces: 2
+    indent-sequences: false
+...
