@@ -3,17 +3,15 @@
 base=$( cd $(dirname $0)/.. && pwd -P)
 
 do_cloudflare=false
-do_core=false
 do_docker=false
 do_force=false
 do_kubernetes=false
 do_yubikey=false
 
-while getopts AFcdhky arg; do
+while getopts AFdhky arg; do
 	case $arg in
-		A) do_core=true;do_docker=true;do_kubernetes=true;do_yubikey=true;;
+		A) do_docker=true;do_kubernetes=true;do_yubikey=true;;
 		F) do_force=true;;
-		c) do_core=true;;
 		d) do_docker=true;;
 		h) echo "no help"; exit 0;;
 		k) do_kubernetes=true;;
@@ -23,49 +21,9 @@ while getopts AFcdhky arg; do
 done
 
 # --------------------------------
-
-if $do_core; then
-	mkdir -p ~/.aws ~/bin/ ~/etc ~/src ~/tmp ~/work
-	mkdir -p ~/.ssh/cfg.d ~/etc/bash.d ~/etc/misc
-	chmod 700 ~/.ssh ~/etc 
-
-	sudo apt update --yes
-	sudo apt install --yes apt-transport-https awscli ca-certificates coreutils curl git gnupg2 jq net-tools oathtool open-vm-tools pip python3 python3-virtualenv vim virtualenv whois wget
 #	sudo apt install --yes gnupg2 gnupg-agent dirmngr cryptsetup scdaemon pcscd secure-delete hopenpgp-tools yubikey-personalization
 #	sudo apt install --yes yubico-piv-tool yubico-piv-tool-devel python3-yubico pam_yubico
-	sudo apt install --yes rustc cargo
-
-	if $do_force; then
-		/bin/cp ${base}/etc/bash.d/*.sh ~/etc/bash.d
-	fi
-
-	grep -q BOOTSTRAP ~/.bashrc
-	if (($?!=0)); then
-		echo 'for kk in ~/etc/bash.d/*.sh; do source $kk; done # BOOTSTRAP' >> ~/.bashrc
-		echo "#" > ~/etc/bash.d/remove.sh
-		echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
-	fi
-
-	if [[ ! -r ~/.ssh/cfg.d/000.cfg ]]; then
-		echo "StrictHostKeyChecking=false" > ~/.ssh/cfg.d/000.cfg
-		chmod 400 ~/.ssh/cfg.d/000.cfg
-	fi
-
-	if [[ ! -r ~/.ssh/config ]]; then
-		cat ~/.ssh/cfg.d/*.cfg > ~/.ssh/config
-		chmod 400 ~/.ssh/config
-	fi
-
-	if [[ ! -r ~/.vimrc ]]; then
-		/bin/cp ${base}/etc/vim/dot_vimrc ~/.vimrc
-	fi
-
-	if [[ ! -d ~/.vim/ftplugin ]]; then
-		mkdir -p ~/.vim/ftplugin
-		/bin/cp ${base}/etc/vim/ftplugin/* ~/.vim/ftplugin
-	fi
-fi
-
+#	sudo apt install --yes rustc cargo
 # --------------------------------
 
 if $do_docker; then
@@ -117,10 +75,6 @@ if $do_cloudflare; then
 	mkdir ~/.cloudflare
 	chmod 700 ~/.cloudflare
 fi
-
-# --------------------------------
-
-sudo apt autoremove --yes
 
 # --------------------------------
 
