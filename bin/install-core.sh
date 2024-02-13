@@ -32,7 +32,7 @@ echo '#' > ~/etc/bash.d/dummy.sh
 for item in ${base}/etc/bash.d/*.sh; do
 	stub=$(basename $item)
 	if [[ ! -e ~/etc/bash.d/${stub} ]]; then
-		echo /bin/cp ${item} ~/etc/bash.d
+		/bin/cp ${item} ~/etc/bash.d
 	fi
 done
 
