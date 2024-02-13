@@ -1,0 +1,9 @@
+cat << ENDCAT
+sudo apt clean
+sudo apt autoclean
+sudo apt autoremove
+sudo apt update
+sudo apt upgrade --yes
+sudo apt-get dist-upgrade
+sudo do-release-upgrade
+ENDCAT
