@@ -14,9 +14,10 @@ done
 
 # --------------------------------
 
-mkdir -p ~/.aws ~/bin/ ~/src ~/tmp ~/work
-mkdir -p ~/.ssh/cfg.d
-mkdir -p ~/etc ~/etc/bash.d ~/etc/misc
+mkdir -p ~/.aws ~/bin/ ~/src ~/tmp
+mkdir -p ~/.ssh/cfg.d ~/.ssh/keys
+mkdir -p ~/etc ~/etc/bash.d ~/etc/misc ~/etc/pyvenvs
+mkdir -p ~/work ~/work/pyvenvs
 
 chmod 700 ~/.ssh ~/etc 
 
