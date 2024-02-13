@@ -1,0 +1,11 @@
+aliyun-python-sdk-core
+aliyun-python-sdk-ecs
+azure-identity
+azure-mgmt-compute
+azure-mgmt-network
+azure-mgmt-resource
+boto3
+google-api-python-client
+google-cloud-compute
+ovh
+python-digitalocean
