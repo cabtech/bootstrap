@@ -14,8 +14,4 @@ alias lltfx="_ls -l *.tf*"
 
 export TF_PLUGIN_CACHE_DIR=/var/lib/terraform/plugins
 
-alias bdy="boundary"
-export BOUNDARY_ADDR="https://boundary.dev.globedx.io"
-export BOUNDARY_CLI_FORMAT="json"
-
 # --------------------------------
