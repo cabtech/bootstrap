@@ -10,8 +10,14 @@ done
 
 # --------------------------------
 
-wget https://releases.hashicorp.com/terraform/${ss_version}/terraform_${ss_version}_linux_amd64.zip
-unzip terraform_${ss_version}_linux_amd64.zip
-/bin/rm -f terraform_${ss_version}_linux_amd64.zip
+if [[ -e terraform ]]; then
+	echo "Installing Terraform $ss_version"
+	wget https://releases.hashicorp.com/terraform/${ss_version}/terraform_${ss_version}_linux_amd64.zip
+	unzip terraform_${ss_version}_linux_amd64.zip
+	/bin/rm -f terraform_${ss_version}_linux_amd64.zip
+else
+	echo "terraform already exists"
+	./terraform -version
+fi
 
 exit 0
