@@ -10,7 +10,7 @@ done
 
 # --------------------------------
 
-if [[ -e terraform ]]; then
+if [[ ! -e terraform ]]; then
 	echo "Installing Terraform $ss_version"
 	wget https://releases.hashicorp.com/terraform/${ss_version}/terraform_${ss_version}_linux_amd64.zip
 	unzip terraform_${ss_version}_linux_amd64.zip
