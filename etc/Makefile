@@ -21,6 +21,7 @@ tflintinit:
 
 dirs:
 	mkdir -p .config group_vars host_vars iam_policies/skip_scan inv.d roles vars
+	chmod 755 group_vars host_vars inv.d
 
 hosts:
 	ct-inventory.sh > /dev/null
