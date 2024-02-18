@@ -1,14 +1,18 @@
 #!/bin/bash
 
+ss_plugins_dir=/var/lib/terraform/plugins
 ss_version="1.4.2"
-while getopts v: arg; do
+while getopts p:v: arg; do
 	case $arg in
+		p) ss_plugins_dir="$OPTARG";;
 		v) ss_version="$OPTARG";;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
 done
 
 # --------------------------------
+
+mkdir -p ${ss_plugins_dir}
 
 if [[ ! -e terraform ]]; then
 	echo "Installing Terraform $ss_version"
@@ -17,7 +21,8 @@ if [[ ! -e terraform ]]; then
 	/bin/rm -f terraform_${ss_version}_linux_amd64.zip
 else
 	echo "terraform already exists"
-	./terraform -version
 fi
+
+./terraform -version
 
 exit 0
