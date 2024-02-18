@@ -14,25 +14,25 @@ done
 
 fname=ansible.cfg
 if [[ ! -e "$fname" ]]; then
-	ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
 if [[ ! -d .config ]]; then
-	ss_verbose && echo "# Installing config for linters"
+	$ss_verbose && echo "# Installing config for linters"
 	mkdir -p .config
 	rsync -a $base/etc/linters/ .config
 fi
 
 fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
-	ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
 fname=Makefile
 if [[ ! -e "$fname" ]]; then
-	ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
