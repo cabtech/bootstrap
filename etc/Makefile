@@ -61,7 +61,7 @@ init:
 upgrade:
 	terraform init -upgrade
 
-plan: .tflint *.zip
+plan: .tflint
 	terraform plan -out plan
 
 apply: .tflint plan
