@@ -13,6 +13,7 @@ done
 # --------------------------------
 
 mkdir -p ${ss_plugins_dir}
+chmod 777 ${ss_plugins_dir}
 
 if [[ ! -e terraform ]]; then
 	echo "Installing Terraform $ss_version"
