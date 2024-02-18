@@ -32,8 +32,13 @@ fi
 
 fname=ansible.env
 if [[ ! -e "$fname" ]]; then
-	echo "Need to install $fname"
-	exit 46
+	$ss_verbose && echo "# Installing $fname"
+	/bin/cp $base/etc/${fname} .
+
+	grep -q ORG $fname
+	if (($?==0)); then
+		echo "Remember to update $fname"
+	fi
 fi
 
 fname=dummy.tf
