@@ -34,11 +34,20 @@ fname=ansible.env
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
+fi
+grep -q ORG $fname
+if (($?==0)); then
+	echo "Remember to update $fname"
+fi
 
-	grep -q ORG $fname
-	if (($?==0)); then
-		echo "Remember to update $fname"
-	fi
+fname=boot.env
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# Installing $fname"
+	/bin/cp $base/etc/${fname} .
+fi
+grep -q undefined $fname
+if (($?==0)); then
+	echo "Remember to update $fname"
 fi
 
 fname=dummy.tf
