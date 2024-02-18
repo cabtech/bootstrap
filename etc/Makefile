@@ -14,7 +14,7 @@ lint: .ylint .tflint
 	yamllint -c .config/yamllint *.yml *vars/*.yml
 	@touch $@
 
-inittflint:
+tflintinit:
 	tflint --init --config=.config/tflint.hcl
 
 # --------------------------------
