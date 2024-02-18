@@ -126,7 +126,7 @@
 - name: ansible-role-hashicorp-terraform
   scm: git
   src: "https://github.com/cabtech/ansible-role-hashicorp-terraform"
-  version: "1.1.0"
+  version: "1.1.1"
 - name: ansible-role-hashicorp-vault
   scm: git
   src: "https://github.com/cabtech/ansible-role-hashicorp-vault"
