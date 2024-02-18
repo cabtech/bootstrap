@@ -138,7 +138,7 @@
 - name: ansible-role-opsys-unix
   scm: git
   src: "https://github.com/cabtech/ansible-role-opsys-unix"
-  version: "2.3.2"
+  version: "2.3.3"
 - name: ansible-role-util-certbot
   scm: git
   src: "https://github.com/cabtech/ansible-role-util-certbot"
