@@ -12,25 +12,37 @@ done
 
 # --------------------------------
 
-fname=ansible.cfg
-if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
-fi
-
 if [[ ! -d .config ]]; then
 	$ss_verbose && echo "# Installing config for linters"
 	mkdir -p .config
 	rsync -a $base/etc/linters/ .config
 fi
 
-fname=requirements.yml
+fname=Makefile
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
-fname=Makefile
+fname=ansible.cfg
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# Installing $fname"
+	/bin/cp $base/etc/${fname} .
+fi
+
+fname=ansible.env
+if [[ ! -e "$fname" ]]; then
+	echo "Need to install $fname"
+	exit 46
+fi
+
+fname=dummy.tf
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# touched $fname"
+	touch $fname
+fi
+
+fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
