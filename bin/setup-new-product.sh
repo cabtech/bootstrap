@@ -28,6 +28,7 @@ fname=ansible.cfg
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
+	chmod 644 $fname
 fi
 
 fname=ansible.env
