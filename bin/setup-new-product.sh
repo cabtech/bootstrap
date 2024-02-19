@@ -1,13 +1,15 @@
 #!/bin/bash
 
 base=$( cd $(dirname $0)/.. && pwd -P)
+ss_acctid=""
 ss_domain=""
 ss_org=""
 ss_product=""
 ss_verbose=false
 
-while getopts d:o:p:v arg; do
+while getopts a:d:o:p:v arg; do
 	case $arg in
+		a) ss_acctid="${OPTARG}";;
 		d) ss_domain="${OPTARG}";;
 		o) ss_org="${OPTARG}";;
 		p) ss_product="${OPTARG}";;
@@ -65,6 +67,15 @@ if [[ -n "$ss_org" ]]; then
 	mkdir -p ~/etc/${ss_org}
 	if [[ -n "$ss_domain" ]]; then
 		mkdir -p ~/etc/${ss_org}/${ss_domain}
+
+		if [[ -n "$ss_acctid" ]]; then
+			fname=common.yml
+			if [[ ! -e "vars/$fname" ]]; then
+				$ss_verbose && echo "# Rendering $fname"
+				cat $base/template/$fname | sed "s/__ACCTID__/${ss_acctid}" | sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
+			fi
+		fi
+
 		if [[ -n "$ss_product" ]]; then
 			mkdir -p ~/etc/${ss_org}/${ss_domain}/${ss_product}
 
@@ -75,7 +86,7 @@ if [[ -n "$ss_org" ]]; then
 			fi
 
 			fname=terragen.yml
-			if [[ ! -e "$fname" ]]; then
+			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering $fname"
 				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
 			fi
