@@ -1,0 +1,33 @@
+---
+# --------------------------------
+
+bootstrap:
+  aws:
+    ami:
+      apea1:
+        ubuntu22:
+          arm: "ami-0310aa84656455de6"  # OwnerId 099720109477
+          x86: "ami-043df2cc7c4a6bf7e"  # OwnerId 099720109477
+      apne1:
+        ubuntu22:
+          arm: "ami-00cc3787408db6f76"  # OwnerId 099720109477
+          x86: "ami-00791cb06dcedc2b4"  # OwnerId 099720109477
+      apne2:
+        ubuntu22:
+          arm: "ami-06655d2f8f876011e"  # OwnerId 099720109477
+          x86: "ami-0c77b53b408f54fc4"  # OwnerId 099720109477
+      apse1:
+        ubuntu22:
+          arm: "ami-0087a557ca8856ab7"  # OwnerId 099720109477
+          x86: "ami-0c33018d6dc1c7e2b"  # OwnerId 099720109477
+      euwe1:
+        ubuntu22:
+          arm: "ami-0a478df3fa1fa383e"  # OwnerId 099720109477
+          x86: "ami-08526df976e37ea3a"  # OwnerId 099720109477
+    __DOMAIN__:
+      acct:
+        code: __DOMAIN__
+        id: "__ACCTID__"
+
+# --------------------------------
+...
