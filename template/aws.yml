@@ -44,37 +44,31 @@ aws:
         segs:
         - name: bastion
           description: "Rules for bastion hosts"
-          rules: "{{ (seg_rules['bastion'] + seg_rules['common'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['bastion'] + seg_rules['common'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: consul
           description: "Rules for consul hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['consul_server'] + seg_rules['outbound_all']) | unique }}"
-        - name: envoyExternal
-          description: "Rules for external facing Envoy nodes"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['envoy_external'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['consul_server'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: grafana
           description: "Rules for grafana hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['grafana_server'] + seg_rules['influxdb'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['grafana_server'] + seg_rules['influxdb'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: nomad
           description: "Rules for nomad hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['nomad'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['nomad'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: svc
           description: "Rules for svc hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['svc'] + seg_rules['outbound_all']) | unique }}"
-        - name: trading
-          description: "Rules for trading hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['trading'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['svc'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: twingate
           description: "Rules for Twingate connector"
           rules: "{{ (seg_rules['twingate']) | unique }}"
         - name: vault
           description: "Rules for vault hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['outbound_all'] + seg_rules['vault']) | unique }}"
-        - name: websitePublic
-          description: "Rules for public webservers and proxies"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['websitePublic'] + seg_rules['outbound_all']) | unique }}"
-        - name: websiteInternal
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['outboundAnywhere'] + seg_rules['vault']) | unique }}"
+        - name: webPrivate
           description: "Rules for private webservers and proxies"
-          rules: "{{ (seg_rules['websitePrivate'] + seg_rules['outbound_all']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['webPrivate'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: webPublic
+          description: "Rules for public webservers and proxies"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['webPublic'] + seg_rules['outboundAnywhere']) | unique }}"
         zones:
         - suffix: a
           has_ngw: true
