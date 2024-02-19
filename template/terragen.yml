@@ -1,0 +1,36 @@
+---
+# --------------------------------
+
+terragen:
+  admin_hosts:
+  - {cidr: "51.155.218.82/32", ipv4: "51.155.218.82/32", comment: "TimShortZen"}
+  - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
+  domain: __DOMAIN__
+  primary: true
+  product: __PRODUCT__
+  providers:
+  - name: "aws"
+    source: "hashicorp/aws"
+    state: present
+    version: "5.30"
+    instances:
+    - credentials_files: ["~/etc/__ORG__/__DOMAIN__/__PRODUCT__/aws/terraform"]
+      description: "default"
+      flags:
+      - {key: "region", value: "eu-west-2"}
+    - credentials_files: ["~/etc/__ORG__/__DOMAIN__/__PRODUCT__/aws/terraform"]
+      description: "Tokyo"
+      flags:
+      - {key: "alias", value: "apne1"}
+      - {key: "region", value: "ap-northeast-1"}
+  terraform:
+    required_version: "1.4.2"
+  trusted_hosts:
+  - {cidr: "51.155.218.82/32", ipv4: "51.155.218.82/32", comment: "TimShortZen"}
+  - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
+  workspace:
+    name: "__ORG__-__DOMAIN__-__PRODUCT__"
+    organization: "cabtech"
+
+# --------------------------------
+...

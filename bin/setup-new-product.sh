@@ -68,11 +68,16 @@ if [[ -n "$ss_org" ]]; then
 		if [[ -n "$ss_product" ]]; then
 			mkdir -p ~/etc/${ss_org}/${ss_domain}/${ss_product}
 
-			template=boot.env.template
 			fname=boot.env
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# Rendering $fname"
-				cat $base/etc/${template} | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+			fi
+
+			fname=terragen.yml
+			if [[ ! -e "$fname" ]]; then
+				$ss_verbose && echo "# Rendering $fname"
+				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
 			fi
 		fi
 	fi
