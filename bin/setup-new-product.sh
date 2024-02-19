@@ -1,10 +1,16 @@
 #!/bin/bash
 
 base=$( cd $(dirname $0)/.. && pwd -P)
+ss_domain=""
+ss_org=""
+ss_product=""
 ss_verbose=false
 
-while getopts v arg; do
+while getopts d:o:p:v arg; do
 	case $arg in
+		d) ss_domain="${OPTARG}";;
+		o) ss_org="${OPTARG}";;
+		p) ss_product="${OPTARG}";;
 		v) ss_verbose=true;;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
@@ -41,16 +47,6 @@ if (($?==0)); then
 	echo "Remember to update $fname"
 fi
 
-fname=boot.env
-if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
-fi
-grep -q undefined $fname
-if (($?==0)); then
-	echo "Remember to update $fname"
-fi
-
 fname=dummy.tf
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# touched $fname"
@@ -61,6 +57,25 @@ fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
 	/bin/cp $base/etc/${fname} .
+fi
+
+# --------------------------------
+
+if [[ -n "$ss_org" ]]; then
+	mkdir -p ~/etc/${ss_org}
+	if [[ -n "$ss_domain" ]]; then
+		mkdir -p ~/etc/${ss_org}/${ss_domain}
+		if [[ -n "$ss_product" ]]; then
+			mkdir -p ~/etc/${ss_org}/${ss_domain}/${ss_product}
+
+			template=boot.env.template
+			fname=boot.env
+			if [[ ! -e "$fname" ]]; then
+				$ss_verbose && echo "# Rendering $fname"
+				cat $base/etc/${template} | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+			fi
+		fi
+	fi
 fi
 
 # --------------------------------
