@@ -71,8 +71,8 @@ if [[ -n "$ss_org" ]]; then
 		if [[ -n "$ss_acctid" ]]; then
 			fname=common.yml
 			if [[ ! -e "vars/$fname" ]]; then
-				$ss_verbose && echo "# Rendering $fname"
-				cat $base/template/$fname | sed "s/__ACCTID__/${ss_acctid}" | sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
+				$ss_verbose && echo "# Rendering vars/$fname"
+				cat $base/template/$fname | sed "s/__ACCTID__/${ss_acctid}/" | sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
 			fi
 		fi
 
@@ -87,7 +87,7 @@ if [[ -n "$ss_org" ]]; then
 
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
-				$ss_verbose && echo "# Rendering $fname"
+				$ss_verbose && echo "# Rendering vars/$fname"
 				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
 			fi
 		fi
