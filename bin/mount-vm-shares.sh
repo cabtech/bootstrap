@@ -1,9 +1,10 @@
 #!/bin/bash
-dnames='/mnt/hgfs/backups /mnt/hgfs/sandisk /mnt/hgfs/shared'
-dnames='/mnt/hgfs/shared'
-sudo mkdir -p $dnames
-sudo chmod 755 $dnames
-# sudo mount -t fuse.vmhgfs-fuse -o allow_other .host:/backups /mnt/hgfs/backups
-# sudo mount -t fuse.vmhgfs-fuse -o allow_other .host:/sandisk /mnt/hgfs/sandisk
-sudo mount -t fuse.vmhgfs-fuse -o allow_other .host:/shared  /mnt/hgfs/shared
+base=/mnt/hgfs
+
+shares="sandisk shared"
+for item in $shares; do
+	sudo mkdir -p $base/$item
+	sudo chmod 755 $base/$item
+	sudo mount -t fuse.vmhgfs-fuse -o allow_other .host:/${item} ${base}/${item}
+done
 exit 0
