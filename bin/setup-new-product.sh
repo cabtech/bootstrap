@@ -5,14 +5,16 @@ ss_acctid=""
 ss_domain=""
 ss_org=""
 ss_product=""
+ss_user=timshort
 ss_verbose=false
 
-while getopts a:d:o:p:v arg; do
+while getopts a:d:o:p:u:v arg; do
 	case $arg in
 		a) ss_acctid="${OPTARG}";;
 		d) ss_domain="${OPTARG}";;
 		o) ss_org="${OPTARG}";;
 		p) ss_product="${OPTARG}";;
+		u) ss_user="${OPTARG}";;
 		v) ss_verbose=true;;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
@@ -78,6 +80,14 @@ if [[ -n "$ss_org" ]]; then
 
 		if [[ -n "$ss_product" ]]; then
 			mkdir -p ~/etc/${ss_org}/${ss_domain}/${ss_product}
+			mkdir -p ~/.ssh/keys/${ss_org}/${ss_domain}/${ss_product}/aws
+
+			prikey=~/.ssh/keys/${ss_org}/${ss_domain}/${ss_product}/aws/id_${ss_user}_${ss_org}_${ss_domain}_${ss_product}_aws
+			if [[ ! -e "$prikey" ]]; then
+				$ss_verbose && echo "# Generating $prikey"
+				ssh-keygen -t ed25519 -a 100 -P "" -f $prikey
+				/bin/cp ${prikey}.pub .
+			fi
 
 			fname=boot.env
 			if [[ ! -e "$fname" ]]; then
