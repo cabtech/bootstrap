@@ -24,7 +24,7 @@ seg_rules:
   - {direction: ingress, ports: {from: 3000, to: 3000}, protocol: "tcp", var: "var.trusted_hosts", description: "Grafana traffic from outside"}
   - {direction: ingress, ports: {from: 3000, to: 3000}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Local Grafana requests"}
   influxdb:
-  - {direction: ingress, ports: {from: 8086, to: 8086}, protocol: "tcp", var: "var.ybrAllInternal", description: "Allow traffic to InfluxDb server"}
+  - {direction: ingress, ports: {from: 8086, to: 8086}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Allow traffic to InfluxDb server"}
   internal:
   - {direction: ingress, ports: {from: 0, to: 0}, protocol: "-1", ipv4_cidrs: ["LOCAL"], description: "Allow all internal ingress"}
   - {direction: egress, ports: {from: 0, to: 0}, protocol: "-1", ipv4_cidrs: ["LOCAL"], description: "Allow all internal egress"}
