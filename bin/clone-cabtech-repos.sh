@@ -1,15 +1,43 @@
 #!/bin/bash
 
-baseurl="https://github.com/cabtech"
-
-repos="ansible-role-app-aptmirror ansible-role-app-brave ansible-role-app-clamav ansible-role-app-datadog ansible-role-app-dnsmasq ansible-role-app-docker ansible-role-app-duoauthproxy ansible-role-app-envoy ansible-role-app-fail2ban ansible-role-app-freeradius ansible-role-app-gitlab ansible-role-app-granulate ansible-role-app-kafka ansible-role-app-nginx ansible-role-app-opengrok ansible-role-app-tor ansible-role-app-zookeeper ansible-role-distro-centos ansible-role-distro-ubuntu ansible-role-family-debian ansible-role-family-redhat ansible-role-hashicorp-common ansible-role-hashicorp-consul ansible-role-hashicorp-nomad ansible-role-hashicorp-terraform ansible-role-hashicorp-vault ansible-role-hashicorp-vaultmanager ansible-role-opsys-unix ansible-role-util-certbot ansible-role-util-debug ansible-role-util-facts ansible-role-util-gcloud ansible-role-util-git ansible-role-util-openjdk ansible-role-util-osbootstrap ansible-role-util-python ansible-role-util-sublime ansible-role-util-terragen ansible-role-util-user ansible-scripts cartman terraform-scripts"
-
-for repo in $repos; do
-	if [[ ! -d "$repo" ]]; then
-		git clone ${baseurl}/${repo}.git
-	else
-		echo "$repo exists"
-	fi
+ss_fname=""
+ss_method=git
+ss_owner=cabtech
+while getopts f:m:o: arg; do
+	case $arg in
+		f) ss_fname="${OPTARG}";;
+		m) ss_method="${OPTARG}";;
+		o) ss_owner="${OPTARG}";;
+		*) echo "ERROR :: bad arg - bye"; exit 42;;
+	esac
 done
+
+basegit="git@github.com:${ss_owner}"
+basehttps="https://github.com/${ss_owner}"
+
+if [[ ! -r "$ss_fname" ]]; then
+	echo "ERROR :: cannot read $ss_fname"
+	exit 4
+else
+	repos=$(cat $ss_fname)
+fi
+
+if [[ "$ss_method" == "git" ]]; then
+	for repo in $repos; do
+		if [[ ! -d "$repo" ]]; then
+			git clone ${basegit}/${repo}.git
+		else
+			echo "$repo exists"
+		fi
+	done
+elif [[ "$ss_method" == "https" ]]; then
+	for repo in $repos; do
+		if [[ ! -d "$repo" ]]; then
+			git clone ${basehttps}/${repo}.git
+		else
+			echo "$repo exists"
+		fi
+	done
+fi
 
 exit 0
