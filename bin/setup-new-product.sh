@@ -35,6 +35,8 @@ fi
 
 # --------------------------------
 
+mkdir -p vars
+
 if [[ ! -d .config ]]; then
 	$ss_verbose && echo "# Installing config for linters"
 	mkdir -p .config
