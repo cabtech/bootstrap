@@ -1,0 +1,15 @@
+---
+# --------------------------------
+
+- name: "Generate HCL"
+  hosts: localhost
+  pre_tasks:
+  - name: "Include vars"
+    ansible.builtin.include_vars:
+      dir: vars
+      extensions: ["yml"]
+  roles:
+  - {role: ansible-role-ct-cassini}
+
+# --------------------------------
+...

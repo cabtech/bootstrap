@@ -1,0 +1,64 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:logs:*:ACCTID:*",
+            "Sid": "AllowWritingToCloudwatchLogs"
+        },
+        {
+            "Action": [
+                "kms:ListAliases",
+                "kms:ListKeys"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Sid": "AllowListingCmks"
+        },
+        {
+            "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:GenerateDataKey"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:kms:REGION:ACCTID:key/*",
+            "Sid": "AllowUseOfCmks"
+        },
+        {
+            "Action": [
+                "s3:DeleteObject",
+                "s3:DeleteObjectVersion",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion",
+                "s3:GetObjectVersionAcl",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::BUCKETNAME/*"
+            ],
+            "Sid": "AllowUseOfS3Objects"
+        },
+        {
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::BUCKETNAME"
+            ],
+            "Sid": "AllowUseOfS3Buckets"
+        }
+	],
+    "Version": "2012-10-17"
+}
