@@ -22,7 +22,20 @@ while getopts a:c:d:o:p:u:v arg; do
 	esac
 done
 
+if [[ -z "${ss_domain}" ]]; then
+	echo "ERROR :: need a domain (-d)"
+	exit 4
+elif [[ -z "${ss_org}" ]]; then
+	echo "ERROR :: need a org (-o)"
+	exit 4
+elif [[ -z "${ss_product}" ]]; then
+	echo "ERROR :: need a product (-p)"
+	exit 4
+fi
+
 # --------------------------------
+
+mkdir -p vars
 
 if [[ ! -d .config ]]; then
 	$ss_verbose && echo "# Installing config for linters"

@@ -16,16 +16,26 @@ done
 
 mkdir -p ~/.aws ~/bin/ ~/src ~/tmp
 mkdir -p ~/.ssh/cfg.d ~/.ssh/keys
-mkdir -p ~/etc ~/etc/bash.d ~/etc/misc ~/etc/pyvenvs
-mkdir -p ~/work ~/work/pyvenvs
+mkdir -p ~/etc ~/etc/bash.d ~/etc/misc ~/etc/pyvirts
+mkdir -p ~/work ~/work/pyvirts
 
-chmod 700 ~/.ssh ~/etc 
+chmod 700 ~/.ssh ~/etc
 
 # --------------------------------
 
-sudo apt update --yes
-sudo apt install --yes apt-transport-https awscli ca-certificates coreutils curl git gnupg2 jq net-tools pip python3 python3-virtualenv vim virtualenv whois wget
-sudo apt autoremove --yes
+if [[ -x /usr/bin/apt ]]; then
+	sudo apt update --yes
+	sudo apt install --yes apt-transport-https ca-certificates coreutils curl git gnupg2 jq net-tools pip python3 python3-virtualenv vim virtualenv whois wget
+	sudo apt install --yes open-vm-tools open-vm-tool-desktop
+	sudo apt autoremove --yes
+	# awscli
+elif [[ -x /usr/bin/dnf ]]; then
+	sudo dnf update
+	sudo dnf install --yes ca-certificates coreutils curl git gnupg2 jq net-tools pip python3 vim whois wget
+	sudo dnf install --yes open-vm-tools open-vm-tool-desktop
+	sudo dnf autoremove -y
+	# apt-transport-https awscli python3-virtualenv virtualenv
+fi
 
 # --------------------------------
 
