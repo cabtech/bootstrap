@@ -1,6 +1,4 @@
 #!/bin/bash
-base=$(cd $(dirname $0) && pwd)
-fname=${base}/../etc/repos.cfg
 
 while getopts f: arg; do
 	case $arg in
@@ -9,7 +7,13 @@ while getopts f: arg; do
 	esac
 done
 
+if [[ ! -r "$fname" ]]; then
+	echo "ERROR :: cannot read $fname"
+	exit 4
+fi
+
 cat $fname | while read NAME; do
-	git clone git@github.com:cabtech/${NAME}.git
+	git clone git@github.com:${NAME}.git
 done
+
 exit 0
