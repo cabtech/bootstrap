@@ -129,6 +129,12 @@ if [[ -n "$ss_org" ]]; then
 				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
 			fi
 
+			fname=site.yml
+			if [[ ! -e "$fname" ]]; then
+				$ss_verbose && echo "# Rendering $fname"
+				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+			fi
+
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"

@@ -9,7 +9,7 @@
       dir: vars
       extensions: ["yml"]
   roles:
-  - {role: ansible-role-ct-cassini}
+  - {role: ansible-role-__ORG__-terragen}
 
 # --------------------------------
 ...
