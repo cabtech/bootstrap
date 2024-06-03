@@ -79,7 +79,7 @@ if [[ ! -e "$fname" ]]; then
 fi
 
 fname=segs.yml
-if [[ ! -e "$fname" ]]; then
+if [[ ! -e "vars/$fname" ]]; then
 	$ss_verbose && echo "# Installing vars/$fname"
 	/bin/cp $base/etc/${fname} vars/$fname
 fi
