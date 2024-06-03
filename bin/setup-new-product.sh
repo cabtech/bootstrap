@@ -132,7 +132,7 @@ if [[ -n "$ss_org" ]]; then
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" | sed "s/__HCP_ORG__/${ss_hcp_org}" > vars/$fname
+				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" | sed "s/__HCP_ORG__/${ss_hcp_org}/" > vars/$fname
 			fi
 
 			fname=terragen.json
