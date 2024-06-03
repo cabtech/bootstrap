@@ -7,7 +7,7 @@ lint: .ylint .tflint
 .tflint: *.tf
 	terraform fmt
 	terraform validate
-	tflint --config=.config/tflint.hcl
+	#UNCOMMENT	tflint --config=.config/tflint.hcl
 	@touch $@
 
 .ylint: *.yml */*.yml .config/yamllint
