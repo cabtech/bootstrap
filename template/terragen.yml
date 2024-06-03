@@ -30,7 +30,7 @@ terragen:
   - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
   workspace:
     name: "__ORG__-__DOMAIN__-__PRODUCT__"
-    organization: "cabtech"
+    organization: "__HCP_ORG__"
 
 # --------------------------------
 ...

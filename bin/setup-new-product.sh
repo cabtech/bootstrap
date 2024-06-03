@@ -4,16 +4,18 @@ base=$( cd $(dirname $0)/.. && pwd -P)
 ss_acctid=""
 ss_cidr=""
 ss_domain=""
+ss_hcp_org=""
 ss_org=""
 ss_product=""
 ss_user=timshort
 ss_verbose=false
 
-while getopts a:c:d:o:p:u:v arg; do
+while getopts a:c:d:h:o:p:u:v arg; do
 	case $arg in
 		a) ss_acctid="${OPTARG}";;
 		c) ss_cidr="${OPTARG}";;
 		d) ss_domain="${OPTARG}";;
+		h) ss_hcp_org="${OPTARG}";;
 		o) ss_org="${OPTARG}";;
 		p) ss_product="${OPTARG}";;
 		u) ss_user="${OPTARG}";;
@@ -33,14 +35,19 @@ elif [[ -z "${ss_product}" ]]; then
 	exit 4
 fi
 
+if [[ -z "${ss_hcp_org}" ]]; then
+	ss_hcp_org="${ss_org}"
+fi
+
 # --------------------------------
 
 mkdir -p vars
 
-if [[ ! -d .config ]]; then
+dirname=.config
+if [[ ! -d "$dirname" ]]; then
 	$ss_verbose && echo "# Installing config for linters"
-	mkdir -p .config
-	rsync -a $base/etc/linters/ .config
+	mkdir -p "$dirname"
+	rsync -a $base/etc/linters/ "$dirname"
 fi
 
 fname=Makefile
@@ -125,7 +132,7 @@ if [[ -n "$ss_org" ]]; then
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
+				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" | sed "s/__HCP_ORG__/${ss_hcp_org}" > vars/$fname
 			fi
 
 			fname=terragen.json
