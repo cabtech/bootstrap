@@ -12,7 +12,7 @@ terragen:
   - name: "aws"
     source: "hashicorp/aws"
     state: present
-    version: "5.30"
+    version: "5.52.0"
     instances:
     - credentials_files: ["~/etc/__ORG__/__DOMAIN__/__PRODUCT__/aws/terraform"]
       description: "default"
@@ -24,7 +24,7 @@ terragen:
       - {key: "alias", value: "apne1"}
       - {key: "region", value: "ap-northeast-1"}
   terraform:
-    required_version: "1.4.2"
+    required_version: "1.5.7"
   trusted_hosts:
   - {cidr: "51.155.218.82/32", ipv4: "51.155.218.82/32", comment: "TimShortZen"}
   - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
