@@ -36,7 +36,7 @@ aws:
       vpcs:
       - name: main
         attachments: []
-        ipv4: {net: "__CIDR__", size: 21}
+        ipv4: {net: "__CIDRPREFIX__", size: __CIDRLEN__}
         ipv6: {auto_alloc: true}
         endpoints: []
         logging:

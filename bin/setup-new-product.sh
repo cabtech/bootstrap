@@ -35,6 +35,9 @@ elif [[ -z "${ss_product}" ]]; then
 	exit 4
 fi
 
+cidrprefix=$(echo $ss_cidr | awk -F'/' '{print $1}')
+cidrlen=$(echo $ss_cidr | awk -F'/' '{print $2}')
+
 if [[ -z "${ss_hcp_org}" ]]; then
 	ss_hcp_org="${ss_org}"
 fi
@@ -102,7 +105,9 @@ if [[ -n "$ss_org" ]]; then
 			fname=common.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname | sed "s/__ACCTID__/${ss_acctid}/" | sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
+				cat $base/template/$fname \
+				| sed "s/__ACCTID__/${ss_acctid}/" \
+				| sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
 			fi
 		fi
 
@@ -120,31 +125,49 @@ if [[ -n "$ss_org" ]]; then
 			fname=aws.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname | sed "s/__CIDR__/${ss_cidr}/" | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
+				cat $base/template/$fname \
+				| sed "s/__CIDRPREFIX__/${cidrprefix}/" \
+				| sed "s/__CIDRLEN__/${cidrlen}/" \
+				| sed "s/__DOMAIN__/${ss_domain}/" \
+				| sed "s/__ORG__/${ss_org}/" \
+				| sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
 			fi
 
 			fname=boot.env
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# Rendering $fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+				cat $base/template/$fname \
+				| sed "s/__DOMAIN__/${ss_domain}/" \
+				| sed "s/__ORG__/${ss_org}/" \
+				| sed "s/__PRODUCT__/${ss_product}/" > $fname
 			fi
 
 			fname=site.yml
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# Rendering $fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+				cat $base/template/$fname \
+				| sed "s/__DOMAIN__/${ss_domain}/" \
+				| sed "s/__ORG__/${ss_org}/" \
+				| sed "s/__PRODUCT__/${ss_product}/" > $fname
 			fi
 
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" | sed "s/__HCP_ORG__/${ss_hcp_org}/" > vars/$fname
+				cat $base/template/$fname \
+				| sed "s/__DOMAIN__/${ss_domain}/" \
+				| sed "s/__HCP_ORG__/${ss_hcp_org}/" \
+				| sed "s/__ORG__/${ss_org}/" \
+				| sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
 			fi
 
 			fname=terragen.json
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# Rendering $fname"
-				cat $base/template/$fname | sed "s/__ORG__/${ss_org}/" | sed "s/__DOMAIN__/${ss_domain}/" | sed "s/__PRODUCT__/${ss_product}/" > $fname
+				cat $base/template/$fname \
+				| sed "s/__DOMAIN__/${ss_domain}/" \
+				| sed "s/__ORG__/${ss_org}/" \
+				| sed "s/__PRODUCT__/${ss_product}/" > $fname
 			fi
 		fi
 	fi
