@@ -3,8 +3,8 @@
 
 terragen:
   admin_hosts:
-  - {cidr: "51.155.218.82/32", ipv4: "51.155.218.82/32", comment: "TimShortZen"}
-  - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
+  - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
+  - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
   domain: __DOMAIN__
   primary: true
   product: __PRODUCT__
@@ -26,8 +26,8 @@ terragen:
   terraform:
     required_version: "1.5.7"
   trusted_hosts:
-  - {cidr: "51.155.218.82/32", ipv4: "51.155.218.82/32", comment: "TimShortZen"}
-  - {cidr: "86.28.23.254/32", ipv4: "86.28.23.254/32", comment: "TimShortVirginMedia"}
+  - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
+  - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
   workspace:
     name: "__ORG__-__DOMAIN__-__PRODUCT__"
     organization: "__HCP_ORG__"
