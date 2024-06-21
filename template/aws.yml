@@ -47,10 +47,10 @@ aws:
           rules: "{{ (seg_rules['bastion'] + seg_rules['common'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: consul
           description: "Rules for consul hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['consul_server'] + seg_rules['outboundAnywhere']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['consulServer'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: grafana
           description: "Rules for grafana hosts"
-          rules: "{{ (seg_rules['common'] + seg_rules['grafana_server'] + seg_rules['influxdb'] + seg_rules['outboundAnywhere']) | unique }}"
+          rules: "{{ (seg_rules['common'] + seg_rules['grafanaServer'] + seg_rules['influxdb'] + seg_rules['outboundAnywhere']) | unique }}"
         - name: nomad
           description: "Rules for nomad hosts"
           rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['nomad'] + seg_rules['outboundAnywhere']) | unique }}"
