@@ -6,6 +6,7 @@ terragen:
   - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
   - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
   domain: __DOMAIN__
+  org: __ORG__
   primary: true
   product: __PRODUCT__
   providers:
