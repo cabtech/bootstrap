@@ -73,16 +73,16 @@ aws:
         - suffix: a
           has_ngw: true
           subnets:
-          - {name: priA, ipv4: {offset: 3, index: 0}, nat_to_use: "a"}
-          - {name: pubA, ipv4: {offset: 3, index: 1}}
+          - {name: priA, ipv4: {offset: 3, index: 0}, ipv6: {offset, 8, index, 0}, viz: pri, ngw_to_use: "a"}
+          - {name: pubA, ipv4: {offset: 3, index: 1}, ipv6: {offset, 8, index, 1}, viz: pub, has_ngw: true}
         - suffix: c
           subnets:
-          - {name: priC, ipv4: {offset: 3, index: 2}, nat_to_use: "a"}
-          - {name: pubC, ipv4: {offset: 3, index: 3}}
+          - {name: priC, ipv4: {offset: 3, index: 2}, ipv6: {offset, 8, index, 2}, viz: pri, ngw_to_use: "a"}
+          - {name: pubC, ipv4: {offset: 3, index: 3}, ipv6: {offset, 8, index, 3}, viz: pub}
         - suffix: d
           subnets:
-          - {name: priD, ipv4: {offset: 3, index: 4}, nat_to_use: "a"}
-          - {name: pubD, ipv4: {offset: 3, index: 5}}
+          - {name: priD, ipv4: {offset: 3, index: 4}, ipv6: {offset, 8, index, 4}, viz: pri, ngw_to_use: "a"}
+          - {name: pubD, ipv4: {offset: 3, index: 5}, ipv6: {offset, 8, index, 5}, viz: pub}
     waf:
       acls: []
   - name: "global"
