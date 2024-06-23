@@ -17,7 +17,7 @@ fi
 cat $fname | while read NAME; do
 	base=$(basename $NAME)
 	if [[ ! -d "$base" ]]; then
-		echo git clone git@github.com:${NAME}.git
+		git clone git@github.com:${NAME}.git
 	elif $ss_verbose; then
 		echo "INFO :: $base exists"
 	fi
