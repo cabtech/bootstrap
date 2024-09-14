@@ -1,5 +1,16 @@
 {
-  "domain": "__DOMAIN__",
-  "org": "__ORG__",
-  "product": "__PRODUCT__"
+    "domain": "__DOMAIN__",
+    "org": "__ORG__",
+    "product": "__PRODUCT__",
+    "aws": {
+        "groups": {},
+        "hosts": {},
+        "regions": {
+            "ap-northeast-1": {},
+            "ap-south-1": {},
+            "ap-southeast-1": {},
+            "eu-west-1": {},
+            "us-east-1": {}
+        }
+    }
 }
