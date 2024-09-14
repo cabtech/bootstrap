@@ -1,16 +1,20 @@
-lint: .ylint .tflint
+lint: .lintterraform .lintyaml
 
-.iamlint: iam_policies/*.json
+.lintiam: iam_policies/*.json
 	parliament --directory iam_policies --exclude_pattern "iam_policies/skip_scan" --include_policy_extension json
 	@touch $@
 
-.tflint: *.tf
+.lintjson: terragen.json
+	python3 -m json.tool $< > $@
+
+.lintterraform: *.tf
 	terraform fmt
 	terraform validate
-	#UNCOMMENT	tflint --config=.config/tflint.hcl
+	@echo "Uncomment tflint command"
+	#tflint --config=.config/tflint.hcl
 	@touch $@
 
-.ylint: *.yml */*.yml .config/yamllint
+.lintyaml: *.yml */*.yml .config/yamllint
 	yamllint -c .config/yamllint *.yml *vars/*.yml
 	@touch $@
 
@@ -48,9 +52,9 @@ users_:
 
 # --------------------------------
 
-hcl: .ylint
+hcl: .lintyaml
 	ct-play.sh -r ansible.env -p site.yml -l localhost -Rd
-hcl_: .ylint
+hcl_: .lintyaml
 	ct-play.sh -r ansible.env -p site.yml -l localhost -Rd -x
 
 .PHONY: init
@@ -61,10 +65,10 @@ init:
 upgrade:
 	terraform init -upgrade
 
-plan: .tflint
+plan: .lintterraform
 	terraform plan -out plan
 
-apply: .tflint plan
+apply: .lintterraform plan
 	terraform apply plan
 	ct-inventory.sh > /dev/null
 	/bin/cp -p inventory-*.cfg ~/.ssh/cfg.d
@@ -253,6 +257,6 @@ rvault_:
 
 .PHONY: clean
 clean:
-	@/bin/rm  -f .iamlint .tflint .ylint plan
+	@/bin/rm -f .lint* plan
 
 # --------------------------------
