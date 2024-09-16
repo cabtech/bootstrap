@@ -5,7 +5,7 @@ seg_rules:
   alertmanager:
   - {direction: ingress, ports: {from: 9093, to: 9093}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Alertmanager"}
   bastion:
-  - {direction: ingress, ports: {from: 22, to: 22}, protocol: "tcp", var: "var.ipv4_admin_hosts", description: "Admin SSH connections"}
+  - {direction: ingress, ports: {from: 22, to: 22}, protocol: "tcp", var4: "var.ipv4_admin_hosts", description: "Admin SSH connections"}
   common:
   - {direction: ingress, ports: {from: 7444, to: 7499}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Consul Connect"}
   - {direction: ingress, ports: {from: -1, to: -1}, protocol: "icmp", ipv4_cidrs: ["LOCAL"], description: "Intra VPC pings"}
@@ -19,9 +19,9 @@ seg_rules:
   - {direction: ingress, ports: {from: 20000, to: 21255}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Consul Sidecar TCP"}
   - {direction: ingress, ports: {from: 20000, to: 21255}, protocol: "udp", ipv4_cidrs: ["LOCAL"], description: "Consul Sidecar UDP"}
   consulServer:
-  - {direction: ingress, ports: {from: 8500, to: 8502}, protocol: "tcp", var: "var.trusted_hosts", description: "Consul external TCP traffic"}
+  - {direction: ingress, ports: {from: 8500, to: 8502}, protocol: "tcp", var4: "var.ipv4_trusted_hosts", description: "Consul external TCP traffic"}
   grafanaServer:
-  - {direction: ingress, ports: {from: 3000, to: 3000}, protocol: "tcp", var: "var.trusted_hosts", description: "Grafana traffic from outside"}
+  - {direction: ingress, ports: {from: 3000, to: 3000}, protocol: "tcp", var4: "var.ipv4_trusted_hosts", description: "Grafana traffic from outside"}
   - {direction: ingress, ports: {from: 3000, to: 3000}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Local Grafana requests"}
   influxdb:
   - {direction: ingress, ports: {from: 8086, to: 8086}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Allow traffic to InfluxDb server"}
@@ -60,8 +60,8 @@ seg_rules:
   - {direction: ingress, ports: {from: 8200, to: 8203}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Vault TCP traffic"}
   - {direction: ingress, ports: {from: 8200, to: 8203}, protocol: "udp", ipv4_cidrs: ["LOCAL"], description: "Vault UDP traffic"}
   webPrivate:
-  - {direction: ingress, ports: {from: 80, to: 80}, protocol: "tcp", var: "var.trusted_hosts", description: "Allow HTTP from trusted addresses"}
-  - {direction: ingress, ports: {from: 443, to: 443}, protocol: "tcp", var: "var.trusted_hosts", description: "Allow HTTPS from trusted addresses"}
+  - {direction: ingress, ports: {from: 80, to: 80}, protocol: "tcp", var4: "var.ipv4_trusted_hosts", description: "Allow HTTP from trusted addresses"}
+  - {direction: ingress, ports: {from: 443, to: 443}, protocol: "tcp", var4: "var.ipv4_trusted_hosts", description: "Allow HTTPS from trusted addresses"}
   - {direction: ingress, ports: {from: 443, to: 443}, protocol: "tcp", ipv4_cidrs: ["LOCAL"], description: "Local HTTPS"}
   webPublic:
   - {direction: ingress, ports: {from: 80, to: 80}, protocol: "tcp", ipv4_cidrs: ["ANYWHERE"], ipv6_cidrs: ["ANYWHERE"], description: "Allow HTTP"}
