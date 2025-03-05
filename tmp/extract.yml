@@ -1,0 +1,33 @@
+- name: 'extract dashboards'
+  hosts: localhost
+  connection: local
+  vars:
+    src:
+      api_key: "XXX"
+      endpoint: "XXX"
+    dst:
+      api_key: "XXX"
+      endpoint: "XXX"
+  vars_files:
+  - our_dashboards.yml
+  tasks:
+  - name: 'Export dashboards'
+    grafana_dashboard:
+      grafana_url: '{{src.endpoint}}'
+      grafana_api_key: '{{src.api_key}}'
+      state: export
+      uid: '{{item}}'
+      path: './dashboards/{{item}}.json'
+    loop: '{{our_dashboards}}'
+    when: false
+#
+  - name: 'Load dashboards'
+    grafana_dashboard:
+      grafana_url: '{{dst.endpoint}}'
+      grafana_api_key: '{{dst.api_key}}'
+      state: present
+      path: './dashboards/{{item}}.json'
+      message: 'Migrated by Ansible'
+      overwrite: true
+    loop: '{{our_dashboards}}'
+...
