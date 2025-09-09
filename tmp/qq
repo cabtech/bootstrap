@@ -1,0 +1,70 @@
+{#
+cloudflare:
+  zones:
+  - id:     string requiredIfNot(name & label)
+    label:  string required example(dodgyNftCom)
+    name:   string requiredIfNot(id) example(dodgy.nft.com)
+#}
+# MANAGED_BY_ANSIBLE
+# --------------------------------
+{% if cloudflare is not defined %}
+# cloudflare: none
+{% elif cloudflare.zones is not defined %}
+# zones: none
+{% else %}
+{% for zone in cloudflare.zones %}
+
+data "cloudflare_zone" "{{ zone.label }}" {
+{% if zone.id is defined %}
+  zone_id = "{{ zone.id }}"
+{% else %}
+  account_id = "{{ cloudflare.acct.id }}"
+  name       = "{{ zone.name }}"
+{% endif %}
+}
+{% endfor %}
+{% endif %}
+
+# --------------------------------
+# end
+
+
+
+{#
+cloudflare:
+  zones:
+  - name         string required example(dodgy.nft.com)
+    label        string required example(dodgyNftCom)
+    record_sets: list 0+
+    - dict
+#}
+# MANAGED_BY_ANSIBLE
+# --------------------------------
+{% if cloudflare is not defined %}
+# cloudflare: none
+{% elif cloudflare.zones is not defined %}
+# cloudflare: no zones
+{% else %}
+{% for zone in cloudflare.zones %}
+{% for record in zone.record_sets %}
+
+resource "cloudflare_record" "{{ zone.label }}_{{ record.rtype | lower }}_{{ record.id | default(0) }}" {
+  allow_overwrite = {{ record.overwrite | default("false") | bool | lower }}
+{% if record.name == "!zone" %}
+  name            = "{{ zone.name }}"
+{% else %}
+  name            = "{{ record.name }}"
+{% endif %}
+  proxied         = {{ record.proxied | default('false') | bool | lower }}
+  ttl             = {{ record.ttl | int }}
+  type            = "{{ record.rtype }}"
+  value           = "{{ record.vals | join(' ') }}"
+  zone_id         = data.cloudflare_zone.{{ zone.label }}.id
+}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+# --------------------------------
+# end
+
