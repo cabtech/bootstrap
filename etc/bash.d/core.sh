@@ -13,7 +13,11 @@ function gralias {
 }
 
 function handy {
-	grep ${1:-wibble} ~/etc/misc/handy
+	grep ${1:-wibble} ~/etc/handy
+}
+
+function ihandy {
+	grep -i ${1:-wibble} ~/etc/handy
 }
 
 function sshgrep {
@@ -41,8 +45,8 @@ alias hall='history'
 alias      v='vi'
 alias     ro='vi -R'
 
-alias chandy='cat ~/etc/misc/handy'
-alias vhandy='vi ~/etc/misc/handy'
+alias chandy='cat ~/etc/handy'
+alias vhandy='vi ~/etc/handy'
 alias     ch='cat handy'
 alias     vh='vi handy'
 
