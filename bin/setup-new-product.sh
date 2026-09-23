@@ -1,17 +1,21 @@
 #!/bin/bash
 
-base=$( cd $(dirname $0)/.. && pwd -P)
+base=$( cd $(dirname "$0")/.. && pwd -P)
 ss_acctid=""
 ss_cidr=""
+ss_clouds=""
 ss_domain=""
 ss_hcp_org=""
 ss_org=""
 ss_product=""
 ss_user=timshort
 ss_verbose=false
+ss_version=1
 
-while getopts a:c:d:h:o:p:u:v arg; do
+while getopts C:V:a:c:d:h:o:p:u:v arg; do
 	case $arg in
+		C) ss_clouds="${OPTARG}";;
+		V) ss_version="${OPTARG}";;
 		a) ss_acctid="${OPTARG}";;
 		c) ss_cidr="${OPTARG}";;
 		d) ss_domain="${OPTARG}";;
@@ -48,49 +52,49 @@ mkdir -p vars
 
 dirname=.config
 if [[ ! -d "$dirname" ]]; then
-	$ss_verbose && echo "# Installing config for linters"
+	$ss_verbose && echo "# INFO :: Installing config for linters"
 	mkdir -p "$dirname"
 	rsync -a $base/etc/linters/ "$dirname"
 fi
 
 fname=Makefile
 if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# INFO :: Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
 fname=ansible.cfg
 if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# INFO :: Installing $fname"
 	/bin/cp $base/etc/${fname} .
 	chmod 644 $fname
 fi
 
 fname=ansible.env
 if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# INFO :: Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 grep -q ORG $fname
 if (($?==0)); then
-	echo "Remember to update $fname"
+	echo "# WARN :: Remember to update $fname"
 fi
 
 fname=dummy.tf
 if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# touched $fname"
+	$ss_verbose && echo "# INFO :: touched $fname"
 	touch $fname
 fi
 
 fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
-	$ss_verbose && echo "# Installing $fname"
+	$ss_verbose && echo "# INFO :: Installing $fname"
 	/bin/cp $base/etc/${fname} .
 fi
 
 fname=segs.yml
 if [[ ! -e "vars/$fname" ]]; then
-	$ss_verbose && echo "# Installing vars/$fname"
+	$ss_verbose && echo "# INFO :: Installing vars/$fname"
 	/bin/cp $base/etc/${fname} vars/$fname
 fi
 
@@ -104,7 +108,7 @@ if [[ -n "$ss_org" ]]; then
 		if [[ -n "$ss_acctid" ]]; then
 			fname=common.yml
 			if [[ ! -e "vars/$fname" ]]; then
-				$ss_verbose && echo "# Rendering vars/$fname"
+				$ss_verbose && echo "# INFO :: Rendering vars/$fname"
 				cat $base/template/$fname \
 				| sed "s/__ACCTID__/${ss_acctid}/" \
 				| sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
@@ -112,30 +116,13 @@ if [[ -n "$ss_org" ]]; then
 		fi
 
 		if [[ -n "$ss_product" ]]; then
-			mkdir -p ~/etc/${ss_org}/${ss_domain}/${ss_product}
-			mkdir -p ~/.ssh/keys/${ss_org}/${ss_domain}/${ss_product}/aws
-
-			prikey=~/.ssh/keys/${ss_org}/${ss_domain}/${ss_product}/aws/id_${ss_user}_${ss_org}_${ss_domain}_${ss_product}_aws
-			if [[ ! -e "$prikey" ]]; then
-				$ss_verbose && echo "# Generating $prikey"
-				ssh-keygen -t ed25519 -a 100 -P "" -f $prikey
-				/bin/cp ${prikey}.pub .
-			fi
-
-			fname=aws.yml
-			if [[ ! -e "vars/$fname" ]]; then
-				$ss_verbose && echo "# Rendering vars/$fname"
-				cat $base/template/$fname \
-				| sed "s/__CIDRPREFIX__/${cidrprefix}/" \
-				| sed "s/__CIDRLEN__/${cidrlen}/" \
-				| sed "s/__DOMAIN__/${ss_domain}/" \
-				| sed "s/__ORG__/${ss_org}/" \
-				| sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
-			fi
+			odp=${ss_org}/${ss_domain}/${ss_product}
+			mkdir -p ~/etc/${odp}
+			mkdir -p ~/.ssh/keys/${odp}
 
 			fname=boot.env
 			if [[ ! -e "$fname" ]]; then
-				$ss_verbose && echo "# Rendering $fname"
+				$ss_verbose && echo "# INFO :: Rendering $fname"
 				cat $base/template/$fname \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
@@ -144,7 +131,7 @@ if [[ -n "$ss_org" ]]; then
 
 			fname=site.yml
 			if [[ ! -e "$fname" ]]; then
-				$ss_verbose && echo "# Rendering $fname"
+				$ss_verbose && echo "# INFO :: Rendering $fname"
 				cat $base/template/$fname \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
@@ -153,21 +140,48 @@ if [[ -n "$ss_org" ]]; then
 
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
-				$ss_verbose && echo "# Rendering vars/$fname"
+				$ss_verbose && echo "# INFO :: Rendering vars/$fname"
 				cat $base/template/$fname \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__HCP_ORG__/${ss_hcp_org}/" \
 				| sed "s/__ORG__/${ss_org}/" \
-				| sed "s/__PRODUCT__/${ss_product}/" > vars/$fname
+				| sed "s/__PRODUCT__/${ss_product}/" \
+				| sed "s/__VERSION__/${ss_version}/" > vars/$fname
 			fi
 
 			fname=terragen.json
 			if [[ ! -e "$fname" ]]; then
-				$ss_verbose && echo "# Rendering $fname"
+				$ss_verbose && echo "# INFO :: Rendering $fname"
 				cat $base/template/$fname \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
-				| sed "s/__PRODUCT__/${ss_product}/" > $fname
+				| sed "s/__PRODUCT__/${ss_product}/" \
+				| sed "s/__VERSION__/${ss_version}/" > $fname
+			fi
+
+			if [[ -n "$ss_clouds" ]]; then
+				clouds=$(echo $ss_clouds | tr ',' ' ')
+				for cloud in $clouds; do
+					if [[ ! -e "vars/${cloud}.yml" ]]; then
+						$ss_verbose && echo "# INFO :: Rendering vars/${cloud}.yml"
+						cat $base/template/${cloud}.yml \
+						| sed "s/__CIDRPREFIX__/${cidrprefix}/" \
+						| sed "s/__CIDRLEN__/${cidrlen}/" \
+						| sed "s/__DOMAIN__/${ss_domain}/" \
+						| sed "s/__ORG__/${ss_org}/" \
+						| sed "s/__PRODUCT__/${ss_product}/" > vars/${cloud}.yml
+
+						slug_path=${ss_org}/${ss_domain}/${ss_product}/${cloud}
+						slug_us=$(echo $slug_path | tr '/' '_')
+						mkdir -p ~/.ssh/keys/${slug_path}
+						prikey=~/.ssh/keys/${slug_path}/id_${ss_user}_${slug_us}
+						if [[ ! -e "$prikey" ]]; then
+							$ss_verbose && echo "# INFO :: Generating $prikey"
+							ssh-keygen -t ed25519 -a 100 -P "" -f "$prikey"
+							/bin/cp "${prikey}.pub" .
+						fi
+					fi
+				done
 			fi
 		fi
 	fi

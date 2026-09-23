@@ -29,6 +29,7 @@ terragen:
   trusted_hosts:
   - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
   - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
+  version: "__VERSION__"
   workspace:
     name: "__ORG__-__DOMAIN__-__PRODUCT__"
     organization: "__HCP_ORG__"
