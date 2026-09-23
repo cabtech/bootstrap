@@ -21,6 +21,13 @@ lint: .lintterraform .lintyaml
 tflintinit:
 	tflint --init --config=.config/tflint.hcl
 
+uv:
+	uv python install 3.14
+	uv init
+	uv python pin python3.14
+	uv add -r    ../../etc/uv/2026sep/requirements.raw
+	uv export -o ../../etc/uv/2026sep/requirements.txt
+
 # --------------------------------
 
 dirs:
