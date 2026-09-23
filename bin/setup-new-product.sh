@@ -49,6 +49,7 @@ fi
 # --------------------------------
 
 mkdir -p vars
+mkdir -p ~/.terragen
 
 dirname=.config
 if [[ ! -d "$dirname" ]]; then
@@ -164,7 +165,7 @@ if [[ -n "$ss_org" ]]; then
 				for cloud in $clouds; do
 					if [[ ! -e "vars/${cloud}.yml" ]]; then
 						$ss_verbose && echo "# INFO :: Rendering vars/${cloud}.yml"
-						cat $base/template/${cloud}.yml \
+						cat $base/template/clouds/${cloud}.yml \
 						| sed "s/__CIDRPREFIX__/${cidrprefix}/" \
 						| sed "s/__CIDRLEN__/${cidrlen}/" \
 						| sed "s/__DOMAIN__/${ss_domain}/" \
