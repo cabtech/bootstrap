@@ -46,8 +46,8 @@ jobs_:
 
 links:
 	@mkdir -p inv.d
-	ln -fs ../roles/galaxy/ansible-role-util-terragen/files/cloud_inventory.py inv.d/cloud_inventory.py
-	ln -fs    roles/galaxy/ansible-role-util-terragen/playbooks playbooks
+	ln -fs ../roles/galaxy/ansible-role-ct-terragen/files/cloud_inventory.py inv.d/cloud_inventory.py
+	ln -fs    roles/galaxy/ansible-role-ct-terragen/playbooks playbooks
 
 roles: requirements.yml
 	ansible-galaxy install -r requirements.yml -p roles/galaxy

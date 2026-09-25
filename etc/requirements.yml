@@ -83,6 +83,12 @@
   scm: git
   src: "https://github.com/cabtech/ansible-role-app-zookeeper"
   version: "0.3.0"
+#
+- name: ansible-role-ct-terragen
+  scm: git
+  src: "git@github.com:cabtech/ansible-role-ct-terragen.git"
+  version: "2.0.2"
+#
 - name: ansible-role-crypto-bitcoinnode
   scm: git
   src: "https://github.com/cabtech/ansible-role-crypto-bitcoinnode"
@@ -186,10 +192,6 @@
 - name: ansible-role-util-sublime
   scm: git
   src: "https://github.com/cabtech/ansible-role-util-sublime"
-  version: "1.0.0"
-- name: ansible-role-util-terragen
-  scm: git
-  src: "git@github.com/cabtech/ansible-role-util-terragen.git"
   version: "1.0.0"
 - name: ansible-role-util-user
   scm: git
