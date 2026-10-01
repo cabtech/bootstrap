@@ -1,3 +1,5 @@
+.PHONY: clean init upgrade
+
 lint: .lintterraform .lintyaml
 
 .lintiam: iam_policies/*.json
@@ -64,15 +66,14 @@ hcl: .lintyaml
 hcl_: .lintyaml
 	ct-play.sh -r ansible.env -p site.yml -l localhost -Rd -x
 
-.PHONY: init
 init:
 	terraform init
-
-.PHONY: upgrade
 upgrade:
 	terraform init -upgrade
 
 plan: .lintterraform
+	terraform plan -out plan
+plan_:
 	terraform plan -out plan
 
 apply: .lintterraform plan
@@ -262,7 +263,6 @@ rvault_:
 
 # --------------------------------
 
-.PHONY: clean
 clean:
 	@/bin/rm -f .lint* plan
 
