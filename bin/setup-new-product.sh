@@ -176,17 +176,8 @@ if [[ -n "$ss_org" ]]; then
 						| sed "s/__DOMAIN__/${ss_domain}/" \
 						| sed "s/__ORG__/${ss_org}/" \
 						| sed "s/__PRODUCT__/${ss_product}/" > vars/${cloud}.yml
-
-						slug_path=${ss_org}/${ss_domain}/${ss_product}/${cloud}
-						slug_us=$(echo $slug_path | tr '/' '_')
-						mkdir -p ~/.ssh/keys/${slug_path}
-						prikey=~/.ssh/keys/${slug_path}/id_${ss_user}_${slug_us}
-						if [[ ! -e "$prikey" ]]; then
-							$ss_verbose && echo "# INFO :: Generating $prikey"
-							ssh-keygen -t ed25519 -a 100 -P "" -f "$prikey"
-							/bin/cp "${prikey}.pub" .
-						fi
 					fi
+					$base/bin/generate-ssh-key.sh -o ${ss_org} -d ${ss_domain} -p ${ss_product} -c ${cloud}
 				done
 			fi
 		fi
