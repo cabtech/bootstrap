@@ -3,11 +3,11 @@
 get_machine_arch () {
     machine_arch=""
     case $(uname -m) in
-        i386)     machine_arch="386" ;;
-        i686)     machine_arch="386" ;;
-        x86_64)   machine_arch="amd64" ;;
-        arm64)    machine_arch="arm64" ;;
-        aarch64)  dpkg --print-architecture | grep -q "arm64" && machine_arch="arm64" || machine_arch="arm" ;;
+        i386)     machine_arch="386";;
+        i686)     machine_arch="386";;
+        x86_64)   machine_arch="amd64";;
+        arm64)    machine_arch="arm64";;
+        aarch64)  dpkg --print-architecture | grep -q "arm64" && machine_arch="arm64" || machine_arch="arm";;
     esac
     echo $machine_arch
 }
@@ -16,18 +16,10 @@ arch=$(get_machine_arch)
 echo "arch=$arch"
 
 case "$(uname -s)" in
-  Darwin*)
-    os="darwin_${arch}"
-    ;;
-  MINGW64*)
-    os="windows_${arch}"
-    ;;
-  MSYS_NT*)
-    os="windows_${arch}"
-    ;;
-  *)
-    os="linux_${arch}"
-    ;;
+  Darwin*) os="darwin_${arch}";;
+  MINGW64*) os="windows_${arch}";;
+  MSYS_NT*) os="windows_${arch}";;
+  *) os="linux_${arch}";;
 esac
 
 echo "os=$os"
