@@ -21,6 +21,13 @@ lint: .lintterraform .lintyaml
 tflintinit:
 	tflint --init --config=.config/tflint.hcl
 
+uv:
+	uv python install 3.14
+	uv init
+	uv python pin python3.14
+	uv add -r    ../../etc/uv/2026sep/requirements.raw
+	uv export -o ../../etc/uv/2026sep/requirements.txt
+
 # --------------------------------
 
 dirs:
@@ -39,8 +46,8 @@ jobs_:
 
 links:
 	@mkdir -p inv.d
-	ln -fs ../roles/galaxy/ansible-role-util-terragen/files/cloud_inventory.py inv.d/cloud_inventory.py
-	ln -fs    roles/galaxy/ansible-role-util-terragen/playbooks playbooks
+	ln -fs ../roles/galaxy/ansible-role-ct-terragen/files/cloud_inventory.py inv.d/cloud_inventory.py
+	ln -fs    roles/galaxy/ansible-role-ct-terragen/playbooks playbooks
 
 roles: requirements.yml
 	ansible-galaxy install -r requirements.yml -p roles/galaxy

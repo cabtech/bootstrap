@@ -1,0 +1,100 @@
+---
+# --------------------------------
+
+docean:
+  acct:
+    code: "{{ bootstrap.aws.__DOMAIN__.acct.code }}"
+    id: "{{ bootstrap.aws.__DOMAIN__.acct.id }}"
+  regions:
+  - name: "ap-northeast-1"
+    code: apne1
+    ec2:
+      common:
+        ami_id: "{{ bootstrap.aws.ami.apne1.ubuntu22.x86 }}"
+        cmk_name: common
+        keypair_name: bootstrap
+        monitored: true
+        protected: true
+      keypairs:
+      - {name: bootstrap, path: "id_timshort___ORG_____DOMAIN_____PRODUCT__aws.pub"}
+      instances: []
+    kms:
+      cmks:
+      - {name: common, description: "General purpose CMK", grant: {cloudwatch: true, users: []}, svc: core, window: 28}
+    lambda:
+      functions: []
+    rds:
+      clusters: []
+    s3:
+      cmk: {name: common}
+      logging: false
+      versioning: false
+      buckets: []
+    secmgr:
+      secrets: []
+    vpc:
+      vpcs:
+      - name: main
+        attachments: []
+        ipv4: {net: "__CIDRPREFIX__", size: __CIDRLEN__}
+        ipv6: {auto_alloc: true}
+        endpoints: []
+        logging:
+          destination: s3
+        segs:
+        - name: bastion
+          description: "Rules for bastion hosts"
+          rules: "{{ (seg_rules['bastion'] + seg_rules['common'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: consul
+          description: "Rules for consul hosts"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['consulServer'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: grafana
+          description: "Rules for grafana hosts"
+          rules: "{{ (seg_rules['common'] + seg_rules['grafanaServer'] + seg_rules['influxdb'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: nomad
+          description: "Rules for nomad hosts"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['nomad'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: svc
+          description: "Rules for svc hosts"
+          rules: "{{ (seg_rules['common'] + seg_rules['svc'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: twingate
+          description: "Rules for Twingate connector"
+          rules: "{{ (seg_rules['twingate']) | unique }}"
+        - name: vault
+          description: "Rules for vault hosts"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['outboundAnywhere'] + seg_rules['vault']) | unique }}"
+        - name: webPrivate
+          description: "Rules for private webservers and proxies"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['webPrivate'] + seg_rules['outboundAnywhere']) | unique }}"
+        - name: webPublic
+          description: "Rules for public webservers and proxies"
+          rules: "{{ (seg_rules['common'] + seg_rules['consul'] + seg_rules['webPublic'] + seg_rules['outboundAnywhere']) | unique }}"
+        zones:
+        - suffix: a
+          has_ngw: true
+          subnets:
+          - {name: priA, ipv4: {offset: 3, index: 0}, ipv6: {offset: 8, index: 0}, viz: pri, ngw_to_use: "a"}
+          - {name: pubA, ipv4: {offset: 3, index: 1}, ipv6: {offset: 8, index: 1}, viz: pub, has_ngw: true}
+        - suffix: c
+          has_ngw: false
+          subnets:
+          - {name: priC, ipv4: {offset: 3, index: 2}, ipv6: {offset: 8, index: 2}, viz: pri, ngw_to_use: "a"}
+          - {name: pubC, ipv4: {offset: 3, index: 3}, ipv6: {offset: 8, index: 3}, viz: pub, has_ngw: false}
+        - suffix: d
+          has_ngw: false
+          subnets:
+          - {name: priD, ipv4: {offset: 3, index: 4}, ipv6: {offset: 8, index: 4}, viz: pri, ngw_to_use: "a"}
+          - {name: pubD, ipv4: {offset: 3, index: 5}, ipv6: {offset: 8, index: 5}, viz: pub, has_ngw: false}
+    waf:
+      acls: []
+  - name: "global"
+    code: global
+    acm:
+      certs: []
+    dns:
+      zones: []
+    iam:
+      profiles: []
+
+# --------------------------------
+...

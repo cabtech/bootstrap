@@ -2,6 +2,7 @@
     "domain": "__DOMAIN__",
     "org": "__ORG__",
     "product": "__PRODUCT__",
+    "version": "__VERSION__",
     "aws": {
         "groups": {},
         "hosts": {},
