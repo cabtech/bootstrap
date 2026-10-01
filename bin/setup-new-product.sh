@@ -44,7 +44,7 @@ fi
 
 # --------------------------------
 
-mkdir -p vars
+mkdir -p host_vars group_vars vars
 
 dirname=.config
 if [[ ! -d "$dirname" ]]; then
@@ -56,20 +56,20 @@ fi
 fname=Makefile
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
+	/bin/cp $base/etc/${fname} ${fname}
 fi
 
 fname=ansible.cfg
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
+	/bin/cp $base/etc/${fname} ${fname}
 	chmod 644 $fname
 fi
 
 fname=ansible.env
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
+	/bin/cp $base/etc/${fname} ${fname}
 fi
 grep -q ORG $fname
 if (($?==0)); then
@@ -82,16 +82,22 @@ if [[ ! -e "$fname" ]]; then
 	touch $fname
 fi
 
+fname=group_vars/all.yml
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# Installing $fname"
+	/bin/cp $base/etc/group-vars-all.yml ${fname}
+fi
+
 fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# Installing $fname"
-	/bin/cp $base/etc/${fname} .
+	/bin/cp $base/etc/${fname} $fname
 fi
 
-fname=segs.yml
-if [[ ! -e "vars/$fname" ]]; then
-	$ss_verbose && echo "# Installing vars/$fname"
-	/bin/cp $base/etc/${fname} vars/$fname
+fname=vars/segs.yml
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# Installing $fname"
+	/bin/cp $base/etc/segs.yml $fname
 fi
 
 # --------------------------------
