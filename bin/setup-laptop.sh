@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install curl gzip jq ncal net-tools yamllint
+sudo apt install curl gh gzip jq ncal net-tools yamllint
 sudo snap install astral-uv --classic
 sudo snap install ghostty --classic
 sudo snap install ruff
