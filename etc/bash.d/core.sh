@@ -74,8 +74,8 @@ alias m2='_m2=$(pwd)'
 alias j3="cd ${_m3}"
 alias m3='_m3=$(pwd)'
 
-if [[ -x /opt/sublime_text/sublime_text ]]; then
-alias st='/opt/sublime_text/sublime_text'
+if [[ -x /usr/bin/fdfind ]]; then
+	alias find=/usr/bin/fdfind
 fi
 
 # --------------------------------
