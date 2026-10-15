@@ -26,13 +26,13 @@ chmod 700 ~/.ssh ~/etc
 if [[ -x /usr/bin/apt ]]; then
 	sudo apt update --yes
 	sudo apt install --yes apt-transport-https ca-certificates coreutils curl git gnupg2 jq net-tools pip python3 python3-virtualenv vim virtualenv whois wget
-	sudo apt install --yes open-vm-tools open-vm-tool-desktop
+	# sudo apt install --yes open-vm-tools open-vm-tool-desktop
 	sudo apt autoremove --yes
 	# awscli
 elif [[ -x /usr/bin/dnf ]]; then
 	sudo dnf update
 	sudo dnf install --yes ca-certificates coreutils curl git gnupg2 jq net-tools pip python3 vim whois wget
-	sudo dnf install --yes open-vm-tools open-vm-tool-desktop
+	# sudo dnf install --yes open-vm-tools open-vm-tool-desktop
 	sudo dnf autoremove -y
 	# apt-transport-https awscli python3-virtualenv virtualenv
 fi
@@ -53,9 +53,16 @@ if (($?==1)); then
 	echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 fi
 
-if [[ ! -r ~/.ssh/cfg.d/000.cfg ]]; then
-	echo "StrictHostKeyChecking=false" > ~/.ssh/cfg.d/000.cfg
+fname=~/.ssh/cfg.d/000.cfg
+if [[ ! -e "$fname" ]]; then
+	/bin/cp "${base}/etc/sshcfg-first.cfg" "$fname"
 	chmod 400 ~/.ssh/cfg.d/000.cfg
+fi
+
+fname=~/.ssh/cfg.d/zzz-last.cfg
+if [[ ! -e "$fname" ]]; then
+	/bin/cp "${base}/etc/sshcfg-last.cfg" "$fname"
+	chmod 400 "$fname"
 fi
 
 if [[ ! -r ~/.ssh/config ]]; then
