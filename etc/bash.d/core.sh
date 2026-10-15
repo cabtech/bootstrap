@@ -34,6 +34,8 @@ function slide {
 
 # --------------------------------
 
+alias myip='curl ipinfo.io'
+
 alias senv='env | sort'
 alias   mk='make'
 
