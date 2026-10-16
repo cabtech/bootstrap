@@ -1,5 +1,7 @@
 #!/bin/bash
-base=$( cd $(dirname $0)/.. && pwd)
+_tmp=$(dirname "$0")
+base=$( cd "$_tmp"/.. && pwd)
+unset _tmp
 
 sudo apt install curl gh gzip jq ncal net-tools yamllint
 sudo apt install fd-find
@@ -12,7 +14,7 @@ if [[ -e /usr/local/bin/starship ]]; then
 	echo "INFO :: Starship is already installed"
 else
 	mkdir -p ~/.config && touch ~/.config/starship.toml
-	$base/bin/install-starship.sh -v v1.26.0
+	"$base"/bin/install-starship.sh -v v1.26.0
 fi
 
 exit 0
