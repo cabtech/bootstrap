@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-This directory is not itself a git repo. It is a workspace holding Cabtech's Ansible roles, and each `ansible-role-*` subdirectory is its own repo (`git@github.com:cabtech/<dir>.git`). Run git commands inside the role directory. Every role uses `main` except `app-freeradius`, which is still on `master`. `repos.cfg` lists the `cabtech/<repo>` names.
+This directory is not itself a git repo. It is a workspace holding Cabtech's Ansible roles, and each `ansible-role-*` subdirectory is its own repo (`git@github.com:cabtech/<dir>.git`). Run git commands inside the role directory. Every role uses `main` as its default branch. `repos.cfg` lists the `cabtech/<repo>` names.
 
 `CLAUDE.md` and `repos.cfg` in this directory are symlinks into `../bootstrap/roles/`. Commit and push changes to them in the `bootstrap` repo (`cabtech/bootstrap`, branch `main`).
 
@@ -25,7 +25,7 @@ Run these inside a role directory. There are no tests (no molecule), so linting 
 - Tool versions: every role has a `uv` project (Python 3.14, a per-role `.venv`) with `init-uv`/`update-uv` targets. To change tools, edit `requirements.raw` and then run `make update-uv`. All lint targets call the linters through `uv run`. In roles with Python under `files/`, the `.lintpython` target runs `black`, which reformats files in place.
 - `make push`: rsyncs the role to `/mnt/hgfs/shared/<role>` (a VM shared folder). It does not do a git push.
 
-Every role has CI in `.github/workflows/`, triggered on push to `main` (`master` for `app-freeradius`) and by manual dispatch. Most `ct-*` roles have `yamllint.yml` (yamllint only); older roles, `app-docker`, `ct-linuxcore` and `ct-terragen` have `lint-ansible.yml` (or `lint.yml`) with yamllint and ansible-lint jobs. Each job runs `astral-sh/setup-uv`, `uv sync --locked --no-install-project` and then `uv run --no-sync <tool>`, so CI uses the versions in `uv.lock`; after `make update-uv`, commit `uv.lock` for CI to pick them up. CI runs yamllint with `--strict`, so warnings fail CI even when `make lint` looks clean.
+Every role has CI in `.github/workflows/`, triggered on push to `main` and by manual dispatch. Most `ct-*` roles have `yamllint.yml` (yamllint only); older roles, `app-docker`, `ct-linuxcore` and `ct-terragen` have `lint-ansible.yml` (or `lint.yml`) with yamllint and ansible-lint jobs. Each job runs `astral-sh/setup-uv`, `uv sync --locked --no-install-project` and then `uv run --no-sync <tool>`, so CI uses the versions in `uv.lock`; after `make update-uv`, commit `uv.lock` for CI to pick them up. CI runs yamllint with `--strict`, so warnings fail CI even when `make lint` looks clean.
 
 Pushes don't trigger CI in 15 private repos (`calibri-core`, `ct-certbot`, `ct-hftcore`, `ct-hfttuning`, `ct-linuxcore`, `ct-linuxusers`, `ct-netdata`, `ct-netperf`, `ct-nginx`, `ct-prometheus`, `ct-security`, `ct-sysjitter`, `ct-telegraf`, `ct-template`, `ct-twingate`). Their workflows pass when started by hand: `gh workflow run <file> -R cabtech/<repo> --ref main`.
 
