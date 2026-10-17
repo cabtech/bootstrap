@@ -4,8 +4,8 @@ git remove -v
 git remote add upstream https://github.com/cabtech/ansible-role-hashicorp-consul.git
 git remote set-url --push upstream no_push
 git remove -v
-git fetch upstream master
-git merge --allow-unrelated-histories upstream/master
+git fetch upstream main
+git merge --allow-unrelated-histories upstream/main
 # fix conflict, probably on README
 git add README.md
 git commit
