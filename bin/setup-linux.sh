@@ -17,4 +17,6 @@ else
 	"$base"/bin/install-starship.sh -v v1.26.0
 fi
 
+echo "Goto https://proton.me/blog/proton-drive-cli"
+
 exit 0
