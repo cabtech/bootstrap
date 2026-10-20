@@ -54,7 +54,9 @@ dirname=.config
 if [[ ! -d "$dirname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing config for linters"
 	mkdir -p "$dirname"
-	rsync -a $base/etc/linters/ "$dirname"
+	/bin/cp $base/etc/ansible-lint "$dirname"
+	/bin/cp $base/etc/tflint.hcl "$dirname"
+	/bin/cp $base/etc/yamllint "$dirname"
 fi
 
 fname=Makefile
