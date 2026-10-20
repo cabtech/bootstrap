@@ -23,10 +23,6 @@
   scm: git
   src: "https://github.com/cabtech/ansible-role-app-docker"
   version: "1.7.2"
-- name: ansible-role-app-duoauthproxy
-  scm: git
-  src: "https://github.com/cabtech/ansible-role-app-duoauthproxy"
-  version: "0.1.0"
 - name: ansible-role-app-envoy
   scm: git
   src: "https://github.com/cabtech/ansible-role-app-envoy"
