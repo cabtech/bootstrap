@@ -41,7 +41,7 @@ dirs:
 	chmod 755 group_vars host_vars inv.d
 
 hosts:
-	ct-inventory.sh > /dev/null
+	ct-inventory-uv.sh > /dev/null
 	/bin/cp -p inventory-*.cfg ~/.ssh/cfg.d
 	ct-mkssh.sh -x
 
