@@ -80,10 +80,22 @@
   src: "https://github.com/cabtech/ansible-role-app-zookeeper"
   version: "0.3.0"
 #
+- name: ansible-role-ct-hftcore
+  scm: git
+  src: "git@github.com:cabtech/ansible-role-ct-hftcore.git"
+  version: "1.0.0"
+- name: ansible-role-ct-linuxcore
+  scm: git
+  src: "git@github.com:cabtech/ansible-role-ct-linuxcore.git"
+  version: "1.7.1"
 - name: ansible-role-ct-terragen
   scm: git
   src: "git@github.com:cabtech/ansible-role-ct-terragen.git"
-  version: "2.0.3"
+  version: "2.0.4"
+- name: ansible-role-ct-twingate
+  scm: git
+  src: "git@github.com:cabtech/ansible-role-ct-twingate.git"
+  version: "1.2.0"
 #
 - name: ansible-role-crypto-bitcoinnode
   scm: git
