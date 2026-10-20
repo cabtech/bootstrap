@@ -94,6 +94,12 @@ if [[ ! -e "$fname" ]]; then
 	/bin/cp $base/etc/group-vars-all.yml ${fname}
 fi
 
+fname=requirements.raw
+if [[ ! -e "$fname" ]]; then
+	$ss_verbose && echo "# INFO :: Installing $fname"
+	/bin/cp $base/etc/${fname} $fname
+fi
+
 fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"

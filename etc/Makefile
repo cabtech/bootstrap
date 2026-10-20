@@ -23,12 +23,16 @@ lint: .lintterraform .lintyaml
 tflintinit:
 	tflint --init --config=.config/tflint.hcl
 
-uv:
+init-uv:
 	uv python install 3.14
 	uv init
 	uv python pin python3.14
-	uv add -r    ../../etc/uv/2026sep/requirements.raw
-	uv export -o ../../etc/uv/2026sep/requirements.txt
+	uv add -r    requirements.raw
+	uv export -o requirements.txt > /dev/null
+
+update-uv:
+	uv add -r    requirements.raw
+	uv export -o requirements.txt > /dev/null
 
 # --------------------------------
 
@@ -52,7 +56,7 @@ links:
 	ln -fs    roles/galaxy/ansible-role-ct-terragen/playbooks playbooks
 
 roles: requirements.yml
-	ansible-galaxy install -r requirements.yml -p roles/galaxy
+	uv run ansible-galaxy install -r requirements.yml -p roles/galaxy
 
 users:
 	ct-play.sh -r ansible.env -p playbooks/manage-linux-users.yml -l uber -Rd
