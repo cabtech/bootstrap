@@ -5,7 +5,6 @@ fi
 
 if [[ -d ~/work/cabtech ]]; then
 	alias    qcs='cd ~/src/cabtech'
-	alias     qc='cd ~/work/cabtech'
 	alias    qcw='cd ~/work/cabtech'
 	alias qroles='cd ~/work/cabtech/roles'
 	alias    qtg='cd ~/work/cabtech/roles/ansible-role-ct-terragen'
