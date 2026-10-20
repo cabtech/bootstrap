@@ -3,8 +3,7 @@
 
 terragen:
   admin_hosts:
-  - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
-  - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
+  - {ipv4: "45.1.1.1/32", comment: "TimShort"}
   domain: __DOMAIN__
   org: __ORG__
   primary: true
@@ -27,8 +26,7 @@ terragen:
   terraform:
     required_version: "1.5.7"
   trusted_hosts:
-  - {ipv4: "51.0.0.0/32", comment: "TimShortZen"}
-  - {ipv4: "86.0.0.0/32", comment: "TimShortHey"}
+  - {ipv4: "45.1.1.1/32", comment: "TimShort"}
   version: "__VERSION__"
   workspace:
     name: "__ORG__-__DOMAIN__-__PRODUCT__"
