@@ -46,9 +46,9 @@ hosts:
 	ct-mkssh.sh -x
 
 jobs:
-	ct-play.sh -r ansible.env -p playbooks/manage-nomad-jobs.yml -l nomad -Rd
+	ct-play-uv.sh -r ansible.env -p playbooks/manage-nomad-jobs.yml -l nomad -Rd
 jobs_:
-	ct-play.sh -r ansible.env -p playbooks/manage-nomad-jobs.yml -l nomad -Rd -x
+	ct-play-uv.sh -r ansible.env -p playbooks/manage-nomad-jobs.yml -l nomad -Rd -x
 
 links:
 	@mkdir -p inv.d
@@ -59,16 +59,16 @@ roles: requirements.yml
 	uv run ansible-galaxy install -r requirements.yml -p roles/galaxy
 
 users:
-	ct-play.sh -r ansible.env -p playbooks/manage-linux-users.yml -l uber -Rd
+	ct-play-uv.sh -r ansible.env -p playbooks/manage-linux-users.yml -l uber -Rd
 users_:
-	ct-play.sh -r ansible.env -p playbooks/manage-linux-users.yml -l uber -Rd -x
+	ct-play-uv.sh -r ansible.env -p playbooks/manage-linux-users.yml -l uber -Rd -x
 
 # --------------------------------
 
 hcl: .lintyaml
-	ct-play.sh -r ansible.env -p site.yml -l localhost -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l localhost -Rd
 hcl_: .lintyaml
-	ct-play.sh -r ansible.env -p site.yml -l localhost -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l localhost -Rd -x
 
 init:
 	terraform init
@@ -90,180 +90,180 @@ apply: .lintterraform plan
 # by cloud
 
 alicloud:
-	ct-play.sh -r ansible.env -p site.yml -l alicloud -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l alicloud -Rd
 alicloud_:
-	ct-play.sh -r ansible.env -p site.yml -l alicloud -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l alicloud -Rd -x
 
 aws:
-	ct-play.sh -r ansible.env -p site.yml -l aws -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l aws -Rd
 aws_:
-	ct-play.sh -r ansible.env -p site.yml -l aws -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l aws -Rd -x
 
 azure:
-	ct-play.sh -r ansible.env -p site.yml -l azure -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l azure -Rd
 azure_:
-	ct-play.sh -r ansible.env -p site.yml -l azure -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l azure -Rd -x
 
 docean:
-	ct-play.sh -r ansible.env -p site.yml -l docean -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l docean -Rd
 docean_:
-	ct-play.sh -r ansible.env -p site.yml -l docean -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l docean -Rd -x
 
 equinix:
-	ct-play.sh -r ansible.env -p site.yml -l equinix -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l equinix -Rd
 equinix_:
-	ct-play.sh -r ansible.env -p site.yml -l equinix -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l equinix -Rd -x
 
 gcp:
-	ct-play.sh -r ansible.env -p site.yml -l gcp -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l gcp -Rd
 gcp_:
-	ct-play.sh -r ansible.env -p site.yml -l gcp -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l gcp -Rd -x
 
 linode:
-	ct-play.sh -r ansible.env -p site.yml -l linode -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l linode -Rd
 linode_:
-	ct-play.sh -r ansible.env -p site.yml -l linode -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l linode -Rd -x
 
 ovh:
-	ct-play.sh -r ansible.env -p site.yml -l ovh -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l ovh -Rd
 ovh_:
-	ct-play.sh -r ansible.env -p site.yml -l ovh -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l ovh -Rd -x
 
 vultr:
-	ct-play.sh -r ansible.env -p site.yml -l vultr -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l vultr -Rd
 vultr_:
-	ct-play.sh -r ansible.env -p site.yml -l vultr -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l vultr -Rd -x
 
 # --------------------------------
 # by function
 
 bastion:
-	ct-play.sh -r ansible.env -p site.yml -l bastion -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l bastion -Rd
 bastion_:
-	ct-play.sh -r ansible.env -p site.yml -l bastion -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l bastion -Rd -x
 
 build:
-	ct-play.sh -r ansible.env -p site.yml -l build -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l build -Rd
 build_:
-	ct-play.sh -r ansible.env -p site.yml -l build -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l build -Rd -x
 
 consul:
-	ct-play.sh -r ansible.env -p site.yml -l consul -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l consul -Rd
 consul_:
-	ct-play.sh -r ansible.env -p site.yml -l consul -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l consul -Rd -x
 
 grafana:
-	ct-play.sh -r ansible.env -p site.yml -l grafana -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l grafana -Rd
 grafana_:
-	ct-play.sh -r ansible.env -p site.yml -l grafana -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l grafana -Rd -x
 
 internet:
-	ct-play.sh -r ansible.env -p site.yml -l internet -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l internet -Rd
 internet_:
-	ct-play.sh -r ansible.env -p site.yml -l internet -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l internet -Rd -x
 
 jenkins:
-	ct-play.sh -r ansible.env -p site.yml -l jenkins -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l jenkins -Rd
 jenkins_:
-	ct-play.sh -r ansible.env -p site.yml -l jenkins -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l jenkins -Rd -x
 
 nginx:
-	ct-play.sh -r ansible.env -p site.yml -l nginx -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l nginx -Rd
 nginx_:
-	ct-play.sh -r ansible.env -p site.yml -l nginx -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l nginx -Rd -x
 
 nomad:
-	ct-play.sh -r ansible.env -p site.yml -l nomad -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l nomad -Rd
 nomad_:
-	ct-play.sh -r ansible.env -p site.yml -l nomad -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l nomad -Rd -x
 
 postgres:
-	ct-play.sh -r ansible.env -p site.yml -l postgres -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l postgres -Rd
 postgres_:
-	ct-play.sh -r ansible.env -p site.yml -l postgres -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l postgres -Rd -x
 
 svc:
-	ct-play.sh -r ansible.env -p site.yml -l svc -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l svc -Rd
 svc_:
-	ct-play.sh -r ansible.env -p site.yml -l svc -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l svc -Rd -x
 
 trading:
-	ct-play.sh -r ansible.env -p site.yml -l trading -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l trading -Rd
 trading_:
-	ct-play.sh -r ansible.env -p site.yml -l trading -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l trading -Rd -x
 
 twingate:
-	ct-play.sh -r ansible.env -p site.yml -l twingate -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l twingate -Rd
 twingate_:
-	ct-play.sh -r ansible.env -p site.yml -l twingate -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l twingate -Rd -x
 
 uber:
-	ct-play.sh -r ansible.env -p site.yml -l uber -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -Rd
 uber_:
-	ct-play.sh -r ansible.env -p site.yml -l uber -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -Rd -x
 
 vault:
-	ct-play.sh -r ansible.env -p site.yml -l vault -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l vault -Rd
 vault_:
-	ct-play.sh -r ansible.env -p site.yml -l vault -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l vault -Rd -x
 
 vpn:
-	ct-play.sh -r ansible.env -p site.yml -l vpn -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l vpn -Rd
 vpn_:
-	ct-play.sh -r ansible.env -p site.yml -l vpn -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l vpn -Rd -x
 
 # --------------------------------
 # by role
 
 rcertbot:
-	ct-play.sh -r ansible.env -p site.yml -l uber -t ct-certbot -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -t ct-certbot -Rd
 rcertbot_:
-	ct-play.sh -r ansible.env -p site.yml -l uber -t ct-certbot -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -t ct-certbot -Rd -x
 
 rfail2ban:
-	ct-play.sh -r ansible.env -p site.yml -l internet -t ct-fail2ban,ct-facts -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l internet -t ct-fail2ban,ct-facts -Rd
 rfail2ban_:
-	ct-play.sh -r ansible.env -p site.yml -l internet -t ct-fail2ban,ct-facts -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l internet -t ct-fail2ban,ct-facts -Rd -x
 
 rgrafana:
-	ct-play.sh -r ansible.env -p site.yml -l grafana -t ct-grafana -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l grafana -t ct-grafana -Rd
 rgrafana_:
-	ct-play.sh -r ansible.env -p site.yml -l grafana -t ct-grafana -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l grafana -t ct-grafana -Rd -x
 
 rjenkins:
-	ct-play.sh -r ansible.env -p site.yml -l jenkins -t ct-jenkins -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l jenkins -t ct-jenkins -Rd
 rjenkins_:
-	ct-play.sh -r ansible.env -p site.yml -l jenkins -t ct-jenkins -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l jenkins -t ct-jenkins -Rd -x
 
 rnetdata:
-	ct-play.sh -r ansible.env -p site.yml -l uber -t ct-netdata -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -t ct-netdata -Rd
 rnetdata_:
-	ct-play.sh -r ansible.env -p site.yml -l uber -t ct-netdata -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l uber -t ct-netdata -Rd -x
 
 rnginx:
-	ct-play.sh -r ansible.env -p site.yml -l nginx -t ct-nginx -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l nginx -t ct-nginx -Rd
 rnginx_:
-	ct-play.sh -r ansible.env -p site.yml -l nginx -t ct-nginx -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l nginx -t ct-nginx -Rd -x
 
 rpinger:
-	ct-play.sh -r ansible.env -p site.yml -l pinger -t ct-pinger -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l pinger -t ct-pinger -Rd
 rpinger_:
-	ct-play.sh -r ansible.env -p site.yml -l pinger -t ct-pinger -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l pinger -t ct-pinger -Rd -x
 
 rtrading:
-	ct-play.sh -r ansible.env -p site.yml -l trading -t ct-trading -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l trading -t ct-trading -Rd
 rtrading_:
-	ct-play.sh -r ansible.env -p site.yml -l trading -t ct-trading -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l trading -t ct-trading -Rd -x
 
 rtwingate:
-	ct-play.sh -r ansible.env -p site.yml -l twingate -t ct-twingate -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l twingate -t ct-twingate -Rd
 rtwingate_:
-	ct-play.sh -r ansible.env -p site.yml -l twingate -t ct-twingate -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l twingate -t ct-twingate -Rd -x
 
 rvault:
-	ct-play.sh -r ansible.env -p site.yml -l vault -t ct-vault -Rd
+	ct-play-uv.sh -r ansible.env -p site.yml -l vault -t ct-vault -Rd
 rvault_:
-	ct-play.sh -r ansible.env -p site.yml -l vault -t ct-vault -Rd -x
+	ct-play-uv.sh -r ansible.env -p site.yml -l vault -t ct-vault -Rd -x
 
 # --------------------------------
 
