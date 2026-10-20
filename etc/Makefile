@@ -45,6 +45,9 @@ hosts:
 	/bin/cp -p inventory-*.cfg ~/.ssh/cfg.d
 	ct-mkssh.sh -x
 
+inventory:
+	uv run ansible-inventory --list --inventory inv.d/
+
 jobs:
 	ct-play-uv.sh -r ansible.env -p playbooks/manage-nomad-jobs.yml -l nomad -Rd
 jobs_:
