@@ -83,7 +83,7 @@
 - name: ansible-role-ct-terragen
   scm: git
   src: "git@github.com:cabtech/ansible-role-ct-terragen.git"
-  version: "2.0.2"
+  version: "2.0.3"
 #
 - name: ansible-role-crypto-bitcoinnode
   scm: git
