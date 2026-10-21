@@ -7,6 +7,7 @@ sudo apt install curl gh gzip jq ncal net-tools yamllint
 sudo apt install fd-find
 sudo snap install astral-uv --classic
 sudo snap install ghostty --classic
+sudo snap install htop
 sudo snap install ripgrep --classic
 sudo snap install ruff
 
