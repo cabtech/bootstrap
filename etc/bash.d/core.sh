@@ -35,17 +35,15 @@ function slide {
 # --------------------------------
 
 alias myip='curl ipinfo.io'
-
+alias   da='direnv allow'
 alias senv='env | sort'
-alias   mk='make'
-
 alias    h='history|tail -20'
 alias  h50='history|tail -50'
 alias h100='history|tail -100'
 alias hall='history'
-
-alias      v='vi'
-alias     ro='vi -R'
+alias   mk='make'
+alias    v='vi'
+alias   ro='vi -R'
 
 alias chandy='cat ~/etc/handy'
 alias vhandy='vi ~/etc/handy'
