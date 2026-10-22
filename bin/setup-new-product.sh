@@ -134,10 +134,10 @@ if [[ -n "$ss_org" ]]; then
 			mkdir -p ~/etc/${odp}
 			mkdir -p ~/.ssh/keys/${odp}
 
-			fname=boot.env
+			fname=.envrc
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering $fname"
-				cat $base/template/$fname \
+				cat $base/template/dot_envrc \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
 				| sed "s/__PRODUCT__/${ss_product}/" > $fname

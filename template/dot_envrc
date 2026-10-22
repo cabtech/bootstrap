@@ -54,6 +54,7 @@ unset  OVH_ENDPOINT
 unset  OVH_REGION
 unset  SCW_ACCESS_KEY
 unset  SCW_SECRET_KEY
+export TF_CLOUD_ORGANIZATION="__ORG__"
 unset  VULTR_API_KEY
 # --------------------------------
 # end
