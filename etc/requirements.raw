@@ -1,7 +1,6 @@
 aliyun-python-sdk-core
 aliyun-python-sdk-ecs
 ansible
-ansible-galaxy
 ansible-lint
 azure-identity
 azure-mgmt-compute
