@@ -77,19 +77,19 @@ alias j3="cd ${_m3}"
 alias m3='_m3=$(pwd)'
 
 if [[ -x /usr/bin/fdfind ]]; then
-	alias find=/usr/bin/fdfind
+	alias fdf=/usr/bin/fdfind
 fi
 
 # --------------------------------
 
 export HISTCONTROL=ignoreboth
-export PATH=${PATH}:~/bin
+export PATH=${PATH}:${HOME}/bin
 export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\] "
 
 #export LC_ALL=C
+#export LC_ALL=en_US.UTF-8
 export LC_COLLATE=C
 #export LC_CTYPE=en_US.UTF-8
-#export LC_ALL=en_US.UTF-8
 
 umask 0022
 
