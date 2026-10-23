@@ -41,7 +41,6 @@ alias    h='history|tail -20'
 alias  h50='history|tail -50'
 alias h100='history|tail -100'
 alias hall='history'
-alias   mk='make'
 alias    v='vi'
 alias   ro='vi -R'
 
