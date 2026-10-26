@@ -3,6 +3,8 @@ _tmp=$(dirname "$0")
 base=$( cd "$_tmp"/.. && pwd)
 unset _tmp
 
+# --------------------------------
+
 sudo apt install curl direnv fd-find gh gnupg gzip jq ncal net-tools pass pinentry-curses yamllint yq
 
 sudo snap install astral-uv --classic
@@ -20,6 +22,10 @@ else
 	"$base"/bin/install-starship.sh -v v1.26.0
 fi
 
+# --------------------------------
+
+mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
+
 idem="133f23ee-5617-4082-9e1f-c78167e89b75"
 grep -q ${idem} ~/.bashrc
 if (($?!=0)); then
@@ -30,6 +36,9 @@ if (($?!=0)); then
 	echo 'eval "$(starship init bash)"' >> ~/.bashrc
 	echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 fi
+
+/bin/cp $base/etc/bash.d/core.sh ~/etc/bash.d
+/bin/cp $base/etc/bash.d/git.sh ~/etc/bash.d
 
 mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg

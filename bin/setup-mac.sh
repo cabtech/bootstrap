@@ -14,6 +14,8 @@ while getopts a arg; do
 	esac
 done
 
+mkdir -p ~/bin ~/etc ~/src ~/tmp ~/work
+
 # --------------------------------
 # install apps
 
@@ -36,7 +38,7 @@ if $do_apps; then
 	echo "install Proton Pass extension for Firefox"
 fi
 
-mkdir ~/etc/bash.d
+mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
 cp $base/etc/bash.d/core.sh ~/etc/bash.d
 cp $base/etc/bash.d/git.sh ~/etc/bash.d
 grep -q 'done # ansible' ~/.zshrc
