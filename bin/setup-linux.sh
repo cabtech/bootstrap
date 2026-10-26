@@ -3,9 +3,7 @@ _tmp=$(dirname "$0")
 base=$( cd "$_tmp"/.. && pwd)
 unset _tmp
 
-sudo apt install curl direnv gh gzip jq ncal net-tools yamllint yq
-sudo apt install fd-find
-sudo apt install pass gnupg pinentry-curses
+sudo apt install curl direnv fd-find gh gnupg gzip jq ncal net-tools pass pinentry-curses yamllint yq
 
 sudo snap install astral-uv --classic
 sudo snap install ghostty --classic
