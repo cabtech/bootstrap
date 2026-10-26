@@ -47,7 +47,7 @@ if $do_dirs; then
 	grep -q ${idem} ~/.zshrc
 	if (($?!=0)); then
 		echo "# $idem" >> ~/.zshrc
-        echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
+		echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
 		echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 		echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
