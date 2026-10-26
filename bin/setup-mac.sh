@@ -28,8 +28,8 @@ if $do_apps; then
 	brew install --cask firefox
 	brew install --cask ghostty
 	brew install --cask iterm2
-	brew install curl direnv docker fd gh git gpg gzip htop iproute2mac
-	brew install jq nmap python3 ripgrep
+	brew install awscli curl direnv docker fd gh git gpg gzip htop
+	brew install iproute2mac jq nmap python3 ripgrep
 	brew install ruff sha2 starship tfenv util-linux uv wget
 	brew install yamllint yq
 fi
