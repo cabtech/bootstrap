@@ -28,17 +28,10 @@ if $do_apps; then
 	brew install --cask firefox
 	brew install --cask ghostty
 	brew install --cask iterm2
-	brew install curl direnv docker fd gh git gpg gzip htop
+	brew install curl direnv docker fd gh git gpg gzip htop iproute2mac
 	brew install jq nmap python3 ripgrep
-	brew install ruff sha2 starship tfenv uv wget
+	brew install ruff sha2 starship tfenv util-linux uv wget
 	brew install yamllint yq
-
-	echo ""
-	echo "find a way to install net-tools and cal"
-	echo ""
-	echo "install Malwarebytes"
-	echo "install Malwarebytes Browser Guard for Firefox"
-	echo "install Proton Pass extension for Firefox"
 fi
 
 if $do_dirs; then
@@ -60,7 +53,13 @@ fi
 
 if $do_msgs; then
 	echo ""
+	echo "# find a way to install net-tools"
+	echo "# sign in to App Store"
+	echo "# install Telegram"
 	echo "# install WhatsApp"
+	echo "# install Malwarebytes"
+	echo "# install Malwarebytes Browser Guard for Firefox"
+	echo "# install Proton Pass extension for Firefox"
 fi
 
 # --------------------------------
