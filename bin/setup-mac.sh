@@ -8,10 +8,13 @@ unset _tmp
 
 do_apps=false
 do_dirs=false
-while getopts ad arg; do
+do_msgs=true
+while getopts Madm arg; do
 	case $arg in
+		M) do_msgs=false;;
 		a) do_apps=true;;
 		d) do_dirs=true;;
+		m) do_msgs=true;;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
 done
@@ -39,7 +42,7 @@ if $do_apps; then
 fi
 
 if $do_dirs; then
-	mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
+	mkdir -p ~/.ssh/cfg.d ~/.ssh/keys ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
 	cp $base/etc/bash.d/core.sh ~/etc/bash.d
 	cp $base/etc/bash.d/git.sh ~/etc/bash.d
 
@@ -53,6 +56,11 @@ if $do_dirs; then
 		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 		# echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
 	fi
+fi
+
+if $do_msgs; then
+	echo ""
+	echo "# install WhatsApp"
 fi
 
 # --------------------------------
