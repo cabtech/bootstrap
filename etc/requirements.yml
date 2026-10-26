@@ -3,10 +3,6 @@
   scm: git
   src: "https://github.com/cabtech/ansible-role-app-aptmirror"
   version: "2.2.1"
-- name: ansible-role-app-brave
-  scm: git
-  src: "https://github.com/cabtech/ansible-role-app-brave"
-  version: "1.3.0"
 - name: ansible-role-app-clamav
   scm: git
   src: "https://github.com/cabtech/ansible-role-app-clamav"
