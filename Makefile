@@ -6,7 +6,7 @@ lintjson:
 	jq . template/preferences.json > /dev/null
 
 lintshell:
-	shellcheck bin/clone-repos.sh bin/setup-laptop.sh
+	shellcheck bin/clone-repos.sh bin/setup-linux.sh
 
 lintyaml:
 	yamllint -c etc/yamllint template/*.yml

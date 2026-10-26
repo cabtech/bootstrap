@@ -7,7 +7,7 @@ base=$(cd $(dirname $0)/.. && pwd)
 target=~/src/cabtech
 mkdir -p $target
 cd $target
-for item in $(grep -v '#' $base/etc/cabtech-repos.cfg); do
+for item in $(grep -v '#' $base/etc/cabtech-misc-repos.cfg); do
 	if [[ ! -d $target/$item ]]; then
 		git clone https://github.com/cabtech/${item}.git
 	else
@@ -18,7 +18,7 @@ done
 target=~/work/cabtech
 mkdir -p $target
 cd $target
-for item in $(grep -v '#' $base/etc/cabtech-repos.cfg); do
+for item in $(grep -v '#' $base/etc/cabtech-misc-repos.cfg); do
 	if [[ ! -d $target/$item ]]; then
 		git clone git@github.com:cabtech/${item}.git
 	else
@@ -29,7 +29,7 @@ done
 target=~/work/cabtech/roles
 mkdir -p $target
 cd $target
-for item in $(grep -v '#' $base/etc/cabtech-roles.cfg); do
+for item in $(grep -v '#' $base/etc/cabtech-role-repos.cfg); do
 	if [[ ! -d $target/$item ]]; then
 		git clone git@github.com:cabtech/${item}.git
 	else
