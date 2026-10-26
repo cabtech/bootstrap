@@ -38,6 +38,7 @@ if $do_dirs; then
 	mkdir -p ~/.ssh/cfg.d ~/.ssh/keys ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
 	cp $base/etc/bash.d/core.sh ~/etc/bash.d
 	cp $base/etc/bash.d/git.sh ~/etc/bash.d
+	cp $base/etc/bash.d/macos.sh ~/etc/bash.d
 
 	idem="133f23ee-5617-4082-9e1f-c78167e89b75"
 	grep -q ${idem} ~/.zshrc
