@@ -35,7 +35,7 @@ if $do_apps; then
 fi
 
 if $do_dirs; then
-	mkdir -p ~/.ssh/cfg.d ~/.ssh/keys/github ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
+	mkdir -p ~/.aws ~/.ssh/cfg.d ~/.ssh/keys/github ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
 	cp $base/etc/bash.d/cabtech.sh ~/etc/bash.d
 	cp $base/etc/bash.d/core.sh ~/etc/bash.d
 	cp $base/etc/bash.d/git.sh ~/etc/bash.d
