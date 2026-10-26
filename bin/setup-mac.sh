@@ -30,7 +30,7 @@ if $do_apps; then
 	brew install --cask iterm2
 	brew install awscli curl direnv docker fd gh git gpg gzip htop
 	brew install iproute2mac jq nmap pass python3 ripgrep
-	brew install ruff sha2 starship tfenv util-linux uv wget
+	brew install ruff sha2 shellcheck starship tfenv util-linux uv wget
 	brew install yamllint yq
 fi
 
@@ -48,7 +48,7 @@ if $do_dirs; then
 		echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
 		echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 		echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+		echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 		# echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
 	fi
 fi
