@@ -81,7 +81,6 @@ fi
 
 export HISTCONTROL=ignoreboth
 export PATH=${PATH}:${HOME}/bin
-export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\] "
 
 #export LC_ALL=C
 #export LC_ALL=en_US.UTF-8
