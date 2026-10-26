@@ -42,9 +42,16 @@ if $do_dirs; then
 	mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
 	cp $base/etc/bash.d/core.sh ~/etc/bash.d
 	cp $base/etc/bash.d/git.sh ~/etc/bash.d
-	grep -q 'done # ansible' ~/.zshrc
+
+	idem="133f23ee-5617-4082-9e1f-c78167e89b75"
+	grep -q ${idem} ~/.zshrc
 	if (($?!=0)); then
-		echo "[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible" >> ~/.zshrc
+		echo "# $idem" >> ~/.zshrc
+		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+        echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
+		# echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
+		# echo 'eval "$(starship init bash)"' >> ~/.zshrc
+		# echo 'eval "$(direnv hook bash)"' >> ~/.zshrc
 	fi
 fi
 
