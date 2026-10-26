@@ -7,14 +7,14 @@ unset _tmp
 # --------------------------------
 
 do_apps=false
-while getopts a arg; do
+do_dirs=false
+while getopts ad arg; do
 	case $arg in
 		a) do_apps=true;;
+		d) do_dirs=true;;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
 done
-
-mkdir -p ~/bin ~/etc ~/src ~/tmp ~/work
 
 # --------------------------------
 # install apps
@@ -38,12 +38,14 @@ if $do_apps; then
 	echo "install Proton Pass extension for Firefox"
 fi
 
-mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
-cp $base/etc/bash.d/core.sh ~/etc/bash.d
-cp $base/etc/bash.d/git.sh ~/etc/bash.d
-grep -q 'done # ansible' ~/.zshrc
-if (($?!=0)); then
-	echo "[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible" >> ~/.zshrc
+if $do_dirs; then
+	mkdir -p ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
+	cp $base/etc/bash.d/core.sh ~/etc/bash.d
+	cp $base/etc/bash.d/git.sh ~/etc/bash.d
+	grep -q 'done # ansible' ~/.zshrc
+	if (($?!=0)); then
+		echo "[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible" >> ~/.zshrc
+	fi
 fi
 
 # --------------------------------
