@@ -18,6 +18,8 @@ done
 # install apps
 
 if $do_apps; then
+    mkdir -p ~/.config && touch ~/.config/starship.toml
+
 	brew install --cask firefox
 	brew install --cask ghostty
 	brew install --cask iterm2
