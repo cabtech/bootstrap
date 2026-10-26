@@ -58,12 +58,15 @@ if $do_msgs; then
 	echo "# find a way to install net-tools"
 	echo "# install Chrome (web)"
 	echo "# sign into Google Account"
+	echo "# install Claude and Claude Code (https://claude.com/downloads)"
 	echo "# install Malwarebytes (web)"
 	echo "# install Malwarebytes Browser Guard for Chrome and Firefox"
 	echo "# install Proton Pass extension for Chrome and Firefox"
+	echo ""
 	echo "# sign in to App Store..."
-	echo "# install Telegram (app store)"
-	echo "# install WhatsApp (app store)"
+	echo "# install Microsoft 365"
+	echo "# install Telegram"
+	echo "# install WhatsApp"
 fi
 
 # --------------------------------
