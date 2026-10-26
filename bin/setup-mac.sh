@@ -36,6 +36,13 @@ if $do_apps; then
 	echo "install Proton Pass extension for Firefox"
 fi
 
+mkdir ~/etc/bash.d
+cp $base/etc/bash.d/core.sh ~/etc/bash.d
+grep -q 'done # ansible' ~/.zshrc
+if (($?!=0)); then
+	echo "[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible" >> ~/.zshrc
+fi
+
 # --------------------------------
 
 exit 0
