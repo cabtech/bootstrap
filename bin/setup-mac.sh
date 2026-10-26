@@ -22,10 +22,12 @@ if $do_apps; then
 	brew install --cask ghostty
 	brew install --cask iterm2
 	brew install curl docker fd gh git gpg gzip htop
-	brew install jq net-tools nmap python3 ripgrep
+	brew install jq nmap python3 ripgrep
 	brew install ruff sha2 starship tfenv uv wget
 	brew install yamllint yq
-	# cal command
+
+	echo ""
+	echo "find a way to install net-tools and cal"
 	echo ""
 	echo "install Malwarebytes"
 	echo "install Malwarebytes Browser Guard for Firefox"
