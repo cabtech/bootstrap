@@ -25,7 +25,7 @@ if $do_apps; then
 	brew install --cask firefox
 	brew install --cask ghostty
 	brew install --cask iterm2
-	brew install curl docker fd gh git gpg gzip htop
+	brew install curl direnv docker fd gh git gpg gzip htop
 	brew install jq nmap python3 ripgrep
 	brew install ruff sha2 starship tfenv uv wget
 	brew install yamllint yq
@@ -47,11 +47,11 @@ if $do_dirs; then
 	grep -q ${idem} ~/.zshrc
 	if (($?!=0)); then
 		echo "# $idem" >> ~/.zshrc
-		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
         echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
+		echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+		echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+		# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 		# echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
-		# echo 'eval "$(starship init bash)"' >> ~/.zshrc
-		# echo 'eval "$(direnv hook bash)"' >> ~/.zshrc
 	fi
 fi
 
