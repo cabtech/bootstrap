@@ -55,7 +55,10 @@ fi
 
 if $do_msgs; then
 	echo ""
-	echo "# find a way to install net-tools"
+	echo "Set Git up"
+	echo 'git config --global user.email "john.doe@example.com"'
+	echo 'git config --global user.name "John Doe"'
+	echo ""
 	echo "# install Chrome (web)"
 	echo "# sign into Google Account"
 	echo "# install Claude and Claude Code (https://claude.com/downloads)"
@@ -67,6 +70,8 @@ if $do_msgs; then
 	echo "# install Microsoft 365"
 	echo "# install Telegram"
 	echo "# install WhatsApp"
+	echo ""
+	echo "# TODO find a way to install net-tools"
 fi
 
 # --------------------------------
