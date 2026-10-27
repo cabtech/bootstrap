@@ -43,7 +43,7 @@ The cross-OS logic follows in `main.yml`. Read facts through `ansible_facts['dis
 
 ### Legacy pattern (some `app-*` roles)
 
-`app-datadog`, `app-envoy` and others depend in `meta/main.yml` on `cabtech/ansible-role-util-facts`, which sets `ct_family` and other `ct_*` facts. That role is in this workspace, but consumers pull a pinned version from GitHub, so a change there only takes effect after you tag a release and bump the `version:` in each consumer's `meta/main.yml`. The `hashicorp-*` roles depend on `hashicorp-common` in the same way. Their `tasks/main.yml` runs `common-pre.yml`, then `setup-{{ ct_family }}.yml` (`debian`/`redhat`), then `common-post.yml`. Keep this structure when editing these roles unless you are explicitly migrating one to the FF pattern.
+`app-datadog`, `app-envoy` and others have a `tasks/main.yml` that runs `common-pre.yml`, then `setup-{{ ansible_facts['os_family'] | lower }}.yml` (`debian`/`redhat`), then `common-post.yml`. No role depends on `util-facts` any more. Read facts from `ansible_facts` instead of its `ct_family`, `ct_distro` and similar facts, and compare against Ansible's own spelling (`'Debian'`, `'RedHat'`, `'Ubuntu'`); use `| lower` where a value goes into a file name, role name or URL. Dependencies come from GitHub at a pinned tag: the `hashicorp-*` roles pin `hashicorp-common`, so a change there only takes effect after you tag a release and bump the `version:` in each consumer's `meta/main.yml`. Keep this structure when editing these roles unless you are explicitly migrating one to the FF pattern.
 
 ## Conventions
 
