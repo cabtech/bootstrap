@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This directory is not itself a git repo. It is a workspace holding Cabtech's Ansible roles, and each `ansible-role-*` subdirectory is its own repo (`git@github.com:cabtech/<dir>.git`). Run git commands inside the role directory. Every role uses `main` as its default branch. `repos.cfg` lists the `cabtech/<repo>` names.
 
-`repos.cfg` is a symlink into `../bootstrap/roles/`. Commit and push changes to it in the `bootstrap` repo (`cabtech/bootstrap`, branch `main`). `CLAUDE.md` is a plain file here and is not under version control.
+`CLAUDE.md` and `repos.cfg` in this directory are symlinks into `../bootstrap/roles/`. Commit and push changes to them in the `bootstrap` repo (`cabtech/bootstrap`, branch `main`).
 
 Role name prefixes:
 - `ct-*`: current-generation roles that follow the template conventions below.
