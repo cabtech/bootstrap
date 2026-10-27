@@ -34,12 +34,12 @@ If pushes stop triggering a workflow that still runs from manual dispatch, renam
 
 `tasks/main.yml` includes `tasks/variables.yml`, which loads one file from `vars/` using `first_found`. It then uses `first_found` again to include one task file from `tasks/`. Both lookups use this order:
 
-1. `<ansible_distribution>-<major>.yml`
-2. `<ansible_distribution>.yml`
-3. `<ansible_os_family>.yml`
+1. `<distribution>-<major>.yml`
+2. `<distribution>.yml`
+3. `<os_family>.yml`
 4. `default.yml`
 
-The cross-OS logic follows in `main.yml`. To add OS-specific behaviour, add matching files and keep `default.yml` as the fallback. Settings that users can override go in `defaults/main.yml`, and per-OS values go in `vars/`.
+The cross-OS logic follows in `main.yml`. Read facts through `ansible_facts['distribution']`, not the top-level `ansible_distribution`. ansible-core 2.21 deprecates injecting facts as top-level variables, and support is due to be removed in 2.24. To add OS-specific behaviour, add matching files and keep `default.yml` as the fallback. Settings that users can override go in `defaults/main.yml`, and per-OS values go in `vars/`.
 
 ### Legacy pattern (some `app-*` roles)
 
