@@ -1,4 +1,8 @@
 #!/bin/bash
+# shellcheck disable=SC2016
+# shellcheck disable=SC2181
+# shellcheck disable=SC2129
+
 _tmp=$(dirname "$0")
 base=$( cd "$_tmp"/.. && pwd)
 unset _tmp
@@ -37,8 +41,8 @@ if (($?!=0)); then
 	echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 fi
 
-/bin/cp $base/etc/bash.d/core.sh ~/etc/bash.d
-/bin/cp $base/etc/bash.d/git.sh ~/etc/bash.d
+/bin/cp "$base/etc/bash.d/core.sh" ~/etc/bash.d
+/bin/cp "$base/etc/bash.d/git.sh" ~/etc/bash.d
 
 mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg
