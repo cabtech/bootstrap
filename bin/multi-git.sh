@@ -1,10 +1,12 @@
 #!/bin/bash
 
 action="status"
-while getopts a:p arg; do
+while getopts ad:pw arg; do
 	case $arg in
 		a) action="${OPTARG}";;
+		d) action="diff";;
 		p) action="pull";;
+		w) action="diff -w";;
 		*) echo "$prog :: ERROR :: bad arg"; exit 42;;
 	esac
 done
