@@ -10,9 +10,11 @@ fi
 
 if [[ -d ~/work/cabtech ]]; then
     alias    qcs='cd ~/src/cabtech'
+    alias   qcsr='cd ~/src/cabtech/roles'
     alias    qcw='cd ~/work/cabtech'
     alias  qboot='cd ~/work/cabtech/bootstrap'
     alias qroles='cd ~/work/cabtech/roles'
+    alias   qcwr='cd ~/work/cabtech/roles'
     alias    qtg='cd ~/work/cabtech/roles/ansible-role-ct-terragen'
     alias    qis='cd ~/work/infra-sites'
     alias   qcdt='cd ~/work/infra-sites/cabtech/dev/trading'
