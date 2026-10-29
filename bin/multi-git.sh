@@ -1,7 +1,7 @@
 #!/bin/bash
 
 action="status"
-while getopts ad:pw arg; do
+while getopts a:dpw arg; do
 	case $arg in
 		a) action="${OPTARG}";;
 		d) action="diff";;
