@@ -9,7 +9,7 @@ function igrenv {
 }
 
 function gralias {
-	env | grep -i ${1:-wibble}
+	alias | grep -i ${1:-wibble}
 }
 
 function handy {
