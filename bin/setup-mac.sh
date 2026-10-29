@@ -1,4 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC2129
+# shellcheck disable=SC2181
+
 set -euo pipefail
 _tmp=$(dirname "$0")
 base=$(cd "$_tmp"/.. && pwd)
@@ -36,18 +39,22 @@ fi
 
 if $do_dirs; then
 	mkdir -p ~/.aws ~/.ssh/cfg.d ~/.ssh/keys/github ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
-	cp $base/etc/bash.d/cabtech.sh ~/etc/bash.d
-	cp $base/etc/bash.d/core.sh ~/etc/bash.d
-	cp $base/etc/bash.d/git.sh ~/etc/bash.d
-	cp $base/etc/bash.d/macos.sh ~/etc/bash.d
+	cp "$base/etc/bash.d/cabtech.sh" ~/etc/bash.d
+	cp "$base/etc/bash.d/core.sh"    ~/etc/bash.d
+	cp "$base/etc/bash.d/git.sh"     ~/etc/bash.d
+	cp "$base/etc/bash.d/macos.sh"   ~/etc/bash.d
 
 	idem="133f23ee-5617-4082-9e1f-c78167e89b75"
 	grep -q ${idem} ~/.zshrc
 	if (($?!=0)); then
 		echo "# $idem" >> ~/.zshrc
+		# shellcheck disable=SC2016
 		echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.zshrc
+		# shellcheck disable=SC2016
 		echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+		# shellcheck disable=SC2016
 		echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+		# shellcheck disable=SC2016
 		echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 		# echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
 	fi

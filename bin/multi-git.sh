@@ -1,5 +1,7 @@
 #!/bin/bash
 
+prog=$(basename "$0")
+
 action="status"
 while getopts a:dpw arg; do
 	case $arg in
@@ -15,10 +17,10 @@ here=$(pwd)
 for kk in *; do
 	if [[ -d "$here/$kk" ]]; then
 		if [[ -d "$here/$kk/.git" ]]; then
-			cd $here/$kk
+			cd "$here/$kk" || exit 4
 			echo '# --------------------------------'
 			pwd
-			git $action
+			git "$action"
 		fi
 	fi
 done

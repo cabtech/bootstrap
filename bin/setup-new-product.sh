@@ -1,6 +1,11 @@
 #!/bin/bash
+# shellcheck disable=SC2002
+# shellcheck disable=SC2181
 
-base=$( cd $(dirname "$0")/.. && pwd -P)
+_tmp=$(dirname "$0")
+base=$( cd "$_tmp"/.. && pwd -P)
+unset _tmp
+
 ss_acctid=""
 ss_cidr=""
 ss_clouds=""
@@ -8,11 +13,10 @@ ss_domain=""
 ss_hcp_org=""
 ss_org=""
 ss_product=""
-ss_user=timshort
 ss_verbose=false
 ss_version=1
 
-while getopts C:V:a:c:d:h:o:p:u:v arg; do
+while getopts C:V:a:c:d:h:o:p:v arg; do
 	case $arg in
 		C) ss_clouds="${OPTARG}";;
 		V) ss_version="${OPTARG}";;
@@ -22,7 +26,6 @@ while getopts C:V:a:c:d:h:o:p:u:v arg; do
 		h) ss_hcp_org="${OPTARG}";;
 		o) ss_org="${OPTARG}";;
 		p) ss_product="${OPTARG}";;
-		u) ss_user="${OPTARG}";;
 		v) ss_verbose=true;;
 		*) echo "ERROR :: bad arg"; exit 42;;
 	esac
@@ -39,8 +42,8 @@ elif [[ -z "${ss_product}" ]]; then
 	exit 4
 fi
 
-cidrprefix=$(echo $ss_cidr | awk -F'/' '{print $1}')
-cidrlen=$(echo $ss_cidr | awk -F'/' '{print $2}')
+cidrprefix=$(echo "$ss_cidr" | awk -F'/' '{print $1}')
+cidrlen=$(echo    "$ss_cidr" | awk -F'/' '{print $2}')
 
 if [[ -z "${ss_hcp_org}" ]]; then
 	ss_hcp_org="${ss_org}"
@@ -54,28 +57,28 @@ dirname=.config
 if [[ ! -d "$dirname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing config for linters"
 	mkdir -p "$dirname"
-	/bin/cp $base/etc/ansible-lint "$dirname"
-	/bin/cp $base/etc/tflint.hcl "$dirname"
-	/bin/cp $base/etc/yamllint "$dirname"
+	/bin/cp "$base/etc/ansible-lint" "$dirname"
+	/bin/cp "$base/etc/tflint.hcl"   "$dirname"
+	/bin/cp "$base/etc/yamllint"     "$dirname"
 fi
 
 fname=Makefile
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/${fname} ${fname}
+	/bin/cp "$base/etc/${fname}" ${fname}
 fi
 
 fname=ansible.cfg
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/${fname} ${fname}
+	/bin/cp "$base/etc/${fname}" ${fname}
 	chmod 644 $fname
 fi
 
 fname=ansible.env
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/${fname} ${fname}
+	/bin/cp "$base/etc/${fname}" ${fname}
 fi
 grep -q ORG $fname
 if (($?==0)); then
@@ -91,53 +94,53 @@ fi
 fname=group_vars/all.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/group-vars-all.yml ${fname}
+	/bin/cp "$base/etc/group-vars-all.yml" ${fname}
 fi
 
 fname=requirements.raw
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/${fname} $fname
+	/bin/cp "$base/etc/${fname}" $fname
 fi
 
 fname=requirements.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/${fname} $fname
+	/bin/cp "$base/etc/${fname}" $fname
 fi
 
 fname=vars/segs.yml
 if [[ ! -e "$fname" ]]; then
 	$ss_verbose && echo "# INFO :: Installing $fname"
-	/bin/cp $base/etc/segs.yml $fname
+	/bin/cp "$base/etc/segs.yml" $fname
 fi
 
 # --------------------------------
 
 if [[ -n "$ss_org" ]]; then
-	mkdir -p ~/etc/${ss_org}
+	mkdir -p "${HOME}/etc/${ss_org}"
 	if [[ -n "$ss_domain" ]]; then
-		mkdir -p ~/etc/${ss_org}/${ss_domain}
+		mkdir -p "${HOME}/etc/${ss_org}/${ss_domain}"
 
 		if [[ -n "$ss_acctid" ]]; then
 			fname=common.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering vars/$fname"
-				cat $base/template/$fname \
+				cat "$base/template/$fname" \
 				| sed "s/__ACCTID__/${ss_acctid}/" \
 				| sed "s/__DOMAIN__/${ss_domain}/" > vars/$fname
 			fi
 		fi
 
 		if [[ -n "$ss_product" ]]; then
-			odp=${ss_org}/${ss_domain}/${ss_product}
-			mkdir -p ~/etc/${odp}
-			mkdir -p ~/.ssh/keys/${odp}
+			odp="${ss_org}/${ss_domain}/${ss_product}"
+			mkdir -p "${HOME}/etc/${odp}"
+			mkdir -p "${HOME}/.ssh/keys/${odp}"
 
 			fname=.envrc
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering $fname"
-				cat $base/template/dot_envrc \
+				cat "$base/template/dot_envrc" \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
 				| sed "s/__PRODUCT__/${ss_product}/" > $fname
@@ -146,7 +149,7 @@ if [[ -n "$ss_org" ]]; then
 			fname=site.yml
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering $fname"
-				cat $base/template/$fname \
+				cat "$base/template/$fname" \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
 				| sed "s/__PRODUCT__/${ss_product}/" > $fname
@@ -155,37 +158,37 @@ if [[ -n "$ss_org" ]]; then
 			fname=terragen.yml
 			if [[ ! -e "vars/$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering vars/$fname"
-				cat $base/template/$fname \
+				cat "$base/template/$fname" \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__HCP_ORG__/${ss_hcp_org}/" \
 				| sed "s/__ORG__/${ss_org}/" \
 				| sed "s/__PRODUCT__/${ss_product}/" \
-				| sed "s/__VERSION__/${ss_version}/" > vars/$fname
+				| sed "s/__VERSION__/${ss_version}/" > "vars/$fname"
 			fi
 
 			fname=terragen.json
 			if [[ ! -e "$fname" ]]; then
 				$ss_verbose && echo "# INFO :: Rendering $fname"
-				cat $base/template/$fname \
+				cat "$base/template/$fname" \
 				| sed "s/__DOMAIN__/${ss_domain}/" \
 				| sed "s/__ORG__/${ss_org}/" \
 				| sed "s/__PRODUCT__/${ss_product}/" \
-				| sed "s/__VERSION__/${ss_version}/" > $fname
+				| sed "s/__VERSION__/${ss_version}/" > "$fname"
 			fi
 
 			if [[ -n "$ss_clouds" ]]; then
-				clouds=$(echo $ss_clouds | tr ',' ' ')
+				clouds=$(echo "$ss_clouds" | tr ',' ' ')
 				for cloud in $clouds; do
 					if [[ ! -e "vars/${cloud}.yml" ]]; then
 						$ss_verbose && echo "# INFO :: Rendering vars/${cloud}.yml"
-						cat $base/template/clouds/${cloud}.yml \
+						cat "$base/template/clouds/${cloud}.yml" \
 						| sed "s/__CIDRPREFIX__/${cidrprefix}/" \
 						| sed "s/__CIDRLEN__/${cidrlen}/" \
 						| sed "s/__DOMAIN__/${ss_domain}/" \
 						| sed "s/__ORG__/${ss_org}/" \
-						| sed "s/__PRODUCT__/${ss_product}/" > vars/${cloud}.yml
+						| sed "s/__PRODUCT__/${ss_product}/" > "vars/${cloud}.yml"
 					fi
-					$base/bin/generate-ssh-key.sh -o ${ss_org} -d ${ss_domain} -p ${ss_product} -c ${cloud}
+					"$base/bin/generate-ssh-key.sh" -o "${ss_org}" -d "${ss_domain}" -p "${ss_product}" -c "${cloud}"
 				done
 			fi
 		fi
