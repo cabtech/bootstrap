@@ -24,6 +24,8 @@ alias       gs='git status'
 alias      gsd='git status .'
 alias      gsp='git status --porcelain'
 alias     gspd='git status --porcelain .'
+alias      gss='git status --short'
+alias     gssd='git status --short .'
 alias       gt='git tag'
 alias      gtt='git tag | sort -V | tail -8'
 
