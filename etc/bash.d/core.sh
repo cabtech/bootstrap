@@ -74,7 +74,8 @@ alias j3='cd ${_m3}'
 alias m3='_m3=$(pwd)'
 
 if [[ -x /usr/bin/fdfind ]]; then
-	alias fdf=/usr/bin/fdfind
+	alias  ff='/usr/bin/fdfind'
+	alias ffa='/usr/bin/fdfind --hidden'
 fi
 
 # --------------------------------
