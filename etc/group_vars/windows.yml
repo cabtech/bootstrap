@@ -1,0 +1,6 @@
+---
+ansible_become_method: runas
+ansible_become_user: SYSTEM
+ansible_connection: ssh
+ansible_shell_type: powershell
+...
