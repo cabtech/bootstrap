@@ -66,11 +66,11 @@ alias   l1='_ls -1'
 alias   ll='_ls -l'
 alias llrt='_ls -lrt'
 
-alias j1="cd ${_m1}"
+alias j1='cd ${_m1}'
 alias m1='_m1=$(pwd)'
-alias j2="cd ${_m2}"
+alias j2='cd ${_m2}'
 alias m2='_m2=$(pwd)'
-alias j3="cd ${_m3}"
+alias j3='cd ${_m3}'
 alias m3='_m3=$(pwd)'
 
 if [[ -x /usr/bin/fdfind ]]; then
