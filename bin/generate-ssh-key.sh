@@ -19,17 +19,17 @@ while getopts c:d:o:p:u:v arg; do
 	esac
 done
 
-if [[ -z "${ss_cloud}" ]]; then
-	echo "ERROR :: need a domain (-c)"
+if [[ -z "${ss_org}" ]]; then
+	echo "ERROR :: need a org (-o)"
 	exit 4
 elif [[ -z "${ss_domain}" ]]; then
 	echo "ERROR :: need a domain (-d)"
 	exit 4
-elif [[ -z "${ss_org}" ]]; then
-	echo "ERROR :: need a org (-o)"
-	exit 4
 elif [[ -z "${ss_product}" ]]; then
 	echo "ERROR :: need a product (-p)"
+	exit 4
+elif [[ -z "${ss_cloud}" ]]; then
+	echo "ERROR :: need a domain (-c)"
 	exit 4
 fi
 
