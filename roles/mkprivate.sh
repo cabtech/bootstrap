@@ -53,8 +53,9 @@ echo "== $old -> $new"
 if [[ $old == *-ct-* ]]; then echo "  skip: already a ct role"; exit 1; fi
 [[ -d $old/.git ]] || { echo "  skip: $old is not a git repo here"; exit 1; }
 
-origin=$(git -C "$old" remote get-url origin)
-newurl=${origin%/*}/$new.git
+# Always use the cabtech SSH alias (~/.ssh/config) so the cabtech key is used,
+# whatever host the public checkout's origin uses.
+newurl=git@cabtech-github.com:cabtech/$new.git
 
 # A private copy must share the public role's root commit; anything else is an unrelated repo.
 same_history() {
@@ -128,8 +129,10 @@ else
 fi
 # 6. link public repo so later merges from private/main skip the rename
 if ((link)); then
-	if git -C "$old" remote get-url private >/dev/null 2>&1; then
+	if [[ $(git -C "$old" remote get-url private 2>/dev/null) == "$newurl" ]]; then
 		echo "  public already has remote 'private'"
+	elif git -C "$old" remote get-url private >/dev/null 2>&1; then
+		run git -C "$old" remote set-url private "$newurl"
 	else
 		run git -C "$old" remote add private "$newurl"
 	fi
