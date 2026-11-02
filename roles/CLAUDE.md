@@ -6,14 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This directory is not itself a git repo. It is a workspace holding Cabtech's Ansible roles, and each `ansible-role-*` subdirectory is its own repo (`git@github.com:cabtech/<dir>.git`). Run git commands inside the role directory. Every role uses `main` as its default branch. `repos.cfg` lists the `cabtech/<repo>` names.
 
-`CLAUDE.md` and `repos.cfg` in this directory are symlinks into `../bootstrap/roles/`. Commit and push changes to them in the `bootstrap` repo (`cabtech/bootstrap`, branch `main`).
+`CLAUDE.md`, `repos.cfg` and `mkprivate.sh` in this directory are symlinks into `../bootstrap/roles/`. Commit and push changes to them in the `bootstrap` repo (`cabtech/bootstrap`, branch `main`).
 
 Role name prefixes:
-- `ct-*`: current-generation roles that follow the template conventions below.
+- `ct-*`: private repos, current-generation roles that follow the template conventions below. Every other prefix is a public repo.
 - `app-*`, `crypto-*`, `calibri-*`: older roles. Their structure varies more.
 - `distro-*`, `family-*`, `hashicorp-*`, `opsys-unix`, `util-*`: oldest generation, mostly untouched since 2020–2024.
 - `ct-template`: the skeleton for new roles. Its placeholders (`ct-TODO` tags, `TODO` meta fields, `dummy` files) are deliberate.
 - `ct-terragen`: the outlier. It uses Ansible only as a templating engine to generate Terraform HCL on localhost.
+
+### Private copies of public roles
+
+Some public roles have a private `ct-*` copy, created with `./mkprivate.sh [-n] <public-role-dir>...`, so that work can be developed privately and then released to the public repo. The private copy is an ordinary private repo, not a GitHub fork: the copy keeps the public history and adds one `Rename to ansible-role-ct-<name>` commit that changes `README.md`, `role_name`, the `pyproject.toml` name, `uv.lock` and `requirements.txt`. The script also adds a `private` remote to the public checkout and commits `git merge -s ours private/main` there, so the rename counts as already merged. It skips existing `ct-*` names (`util-certbot`, `app-grafana`, `app-nginx` and `util-security` would collide) and is safe to re-run. Existing pairs: `util-debug` → `ct-debug`.
+
+To release from a private copy, work in the public repo: `git fetch private`, then `git merge private/main` (publishes the private commit history), `git cherry-pick <sha>`, or `git merge --squash private/main` followed by a commit and `git merge -s ours private/main` so the next sync starts from there. Review `git diff main...private/main` for internal-only content before pushing. In the public role, keep the public names when resolving conflicts on the renamed lines.
 
 `ct-template`, `ct-terragen`, `ct-twingate` and `ct-netbirdclient` each have their own `CLAUDE.md`. Read the role's own file before working there, because it overrides this one.
 
