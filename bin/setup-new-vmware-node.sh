@@ -6,7 +6,7 @@
 sudo apt update --yes
 sudo apt install git openssh-server --yes
 # sudo ssh-keygen -A
-ip addr show | egrep -i "inet|mtu"
+ip addr show | grep -E -i "inet|mtu"
 
 mkdir -p ~/.ssh/cfg.d ~/.ssh/keys ~/work
 chmod 700 ~/.ssh ~/.ssh/cfg.d ~/.ssh/keys
@@ -14,9 +14,10 @@ touch ~/.ssh/config
 chmod 600 ~/.ssh/config
 echo "StrictHostKeyChecking=no" > ~/.ssh/cfg.d/00.cfg
 
-cd ~/work
+cd ~/work || exit
 git clone https://github.com/cabtech/bootstrap.git
 git clone https://github.com/cabtech/ansible-scripts.git
+# shellcheck disable=SC2016
 echo 'export PATH=${PATH}:~/work/ansible-scripts' >> ~/.bashrc
 
 # --------------------------------
