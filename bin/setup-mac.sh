@@ -62,12 +62,13 @@ fi
 
 if $do_msgs; then
 	echo ""
-	echo "Set Git up"
+	echo "Set up Git"
 	echo 'git config --global user.email "john.doe@example.com"'
 	echo 'git config --global user.name "John Doe"'
 	echo ""
 	echo "# install Chrome (web)"
 	echo "# sign into Google Account"
+	echo ""
 	echo "# install Claude and Claude Code (https://claude.com/downloads)"
 	echo "# install Malwarebytes (web)"
 	echo "# install Malwarebytes Browser Guard for Chrome and Firefox"
@@ -76,6 +77,7 @@ if $do_msgs; then
 	echo "# sign in to App Store..."
 	echo "# install Microsoft 365"
 	echo "# install Telegram"
+	echo "# install Twingate"
 	echo "# install WhatsApp"
 	echo ""
 	echo "# TODO find a way to install net-tools"
