@@ -26,15 +26,17 @@ done
 # install apps
 
 if $do_apps; then
-    mkdir -p ~/.config && touch ~/.config/starship.toml
+	mkdir -p ~/.config && touch ~/.config/starship.toml
 
 	brew install --cask firefox
 	brew install --cask ghostty
 	brew install --cask iterm2
 	brew install awscli curl direnv docker fd gh git gpg gzip htop
-	brew install iproute2mac jq nmap pass python3 ripgrep
-	brew install ruff sha2 shellcheck starship tfenv util-linux uv wget
-	brew install yamllint yq
+	brew install iproute2mac nmap ripgrep
+	brew install sha2 shellcheck starship tfenv util-linux wget
+	brew install python3 ruff uv
+	brew install jq yamllint yq
+	brew install gnupg pass pinentry-mac
 fi
 
 if $do_dirs; then
