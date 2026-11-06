@@ -67,12 +67,12 @@ fi
 
 cd ~/etc/bash.d || exit 99
 
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/cabtech.sh
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/core.sh
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/direnv.sh
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/git.sh
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/starship.sh
-ln -s ~/src/cabtech/bootstrap/etc/bash.d/terraform.sh
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/cabtech.sh   .
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/core.sh      .
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/direnv.sh    .
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/git.sh       .
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/starship.sh  .
+ln -s ~/src/cabtech/bootstrap/etc/bash.d/terraform.sh .
 
 # --------------------------------
 
