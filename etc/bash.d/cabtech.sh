@@ -8,9 +8,12 @@ if [[ -d ~/src/cabtech/ansible-scripts ]]; then
     PATH=${PATH}:~/src/cabtech/ansible-scripts
 fi
 
-if [[ -d ~/work/cabtech ]]; then
+if [[ -d ~/src/cabtech ]]; then
     alias    qcs='cd ~/src/cabtech'
     alias   qcsr='cd ~/src/cabtech/roles'
+fi
+
+if [[ -d ~/work/cabtech ]]; then
     alias    qcw='cd ~/work/cabtech'
     alias  qboot='cd ~/work/cabtech/bootstrap'
     alias qroles='cd ~/work/cabtech/roles'
