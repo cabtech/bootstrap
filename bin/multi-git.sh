@@ -22,7 +22,7 @@ for kk in *; do
 			cd "$here/$kk" || exit 4
 			echo '# --------------------------------'
 			pwd
-			git "$action"
+			git $action
 		fi
 	fi
 done
