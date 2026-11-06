@@ -29,7 +29,7 @@ elif [[ -z "${ss_product}" ]]; then
 	echo "ERROR :: need a product (-p)"
 	exit 4
 elif [[ -z "${ss_cloud}" ]]; then
-	echo "ERROR :: need a domain (-c)"
+	echo "ERROR :: need a cloud (-c)"
 	exit 4
 fi
 
