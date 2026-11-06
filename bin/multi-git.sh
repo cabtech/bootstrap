@@ -22,6 +22,7 @@ for kk in *; do
 			cd "$here/$kk" || exit 4
 			echo '# --------------------------------'
 			pwd
+			# shellcheck disable=SC2086
 			git $action
 		fi
 	fi
