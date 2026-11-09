@@ -12,7 +12,7 @@ mkdir -p ~/.ssh/cfg.d ~/.ssh/keys ~/work
 chmod 700 ~/.ssh ~/.ssh/cfg.d ~/.ssh/keys
 touch ~/.ssh/config
 chmod 600 ~/.ssh/config
-echo "StrictHostKeyChecking=no" > ~/.ssh/cfg.d/00.cfg
+echo "StrictHostKeyChecking=accept-new" > ~/.ssh/cfg.d/00.cfg
 
 cd ~/work || exit
 git clone https://github.com/cabtech/bootstrap.git
