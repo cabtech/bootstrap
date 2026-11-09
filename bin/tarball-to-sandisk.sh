@@ -18,7 +18,7 @@ sandisk_dir=${sandisk_base}/backups/${machine}
 shared_base=/mnt/hgfs/shared
 shared_dir=${shared_base}/backups/${machine}
 timestamp=$(date +%Y%m%d)
-rsync_excludes="--exclude=product/disruptor/ --exclude=product/world/ --exclude=product/research/ --exclude=.local --exclude=.cache --exclude=.docker --exclude=.config --exclude=venv/ --exclude=venvs/ --exclude=.git"
+rsync_excludes="--exclude=product/disruptor/ --exclude=product/world/ --exclude=product/research/ --exclude=.local --exclude=.cache --exclude=.docker --exclude=.config --exclude=venv/ --exclude=venvs/ --exclude=.git --exclude=.aws --exclude=.gnupg --exclude=.ssh --exclude=.terragen.json"
 
 mkdir -p $shared_dir
 mkdir -p $sandisk_dir

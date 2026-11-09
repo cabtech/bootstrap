@@ -1,6 +1,10 @@
 #!/bin/bash
 cd /home
 rsync --progress -a --no-links --info="skip0" \
+--exclude=".aws" \
+--exclude=".gnupg" \
+--exclude=".ssh" \
+--exclude=".terragen.json" \
 --exclude=".cache" \
 --exclude=".cargo" \
 --exclude=".git" \
