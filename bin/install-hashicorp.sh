@@ -15,7 +15,8 @@ fi
 	sudo apt install consul nomad terraform vault
 sudo mkdir -p /var/lib/terraform/plugins
 sudo chmod 755 /var/lib/terraform
-sudo chmod 777 /var/lib/terraform/plugins
+sudo chown "$USER" /var/lib/terraform/plugins
+sudo chmod 0755 /var/lib/terraform/plugins
 
 echo "# MANUAL create ~/.terraformrc"
 
