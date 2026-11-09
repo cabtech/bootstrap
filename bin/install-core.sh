@@ -50,7 +50,19 @@ done
 grep -q "done # ansible" ~/.bashrc
 if (($?==1)); then
 	echo '[[ -d ~/etc/bash.d ]] && for ff in ~/etc/bash.d/*.sh; do source $ff; done # ansible' >> ~/.bashrc
-	echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+fi
+
+# sudoers.d ignores file names containing a dot, so don't add one
+fname=/etc/sudoers.d/90-sudo-nopasswd
+if ! sudo test -e "$fname"; then
+	tmpfile=$(mktemp)
+	echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" > "$tmpfile"
+	if sudo visudo -cqf "$tmpfile"; then
+		sudo install -m 0440 -o root -g root "$tmpfile" "$fname"
+	else
+		echo "ERROR :: sudoers snippet failed visudo check, not installing $fname"
+	fi
+	/bin/rm -f "$tmpfile"
 fi
 
 fname=~/.ssh/cfg.d/000.cfg
