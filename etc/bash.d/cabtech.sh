@@ -1,10 +1,10 @@
 
-if [[ -d ~/src/cabtech/bootstrap ]]; then
-	PATH=${PATH}:~/src/cabtech/bootstrap/bin
-fi
-
 if [[ -d ~/src/cabtech/primer ]]; then
 	PATH=${PATH}:~/src/cabtech/primer/bin
+fi
+
+if [[ -d ~/src/cabtech/bootstrap ]]; then
+	PATH=${PATH}:~/src/cabtech/bootstrap/bin
 fi
 
 if [[ -d ~/src/cabtech/ansible-scripts ]]; then
