@@ -32,6 +32,8 @@ if $do_apps; then
 	brew install --cask ghostty
 	brew install --cask iterm2
 	brew install --cask session-manager-plugin  # AWS Session Manager
+	brew install --cask terraform-linters/tap/tflint
+
 	brew install awscli curl direnv docker fd gh git gpg gzip htop
 	brew install iproute2mac nmap ripgrep
 	brew install sha2 shellcheck starship tfenv util-linux wget
