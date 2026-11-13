@@ -6,7 +6,9 @@ lintjson:
 	jq . template/preferences.json > /dev/null
 
 lintshell:
-	shellcheck bin/clone-repos.sh bin/install-starship.sh bin/install-tenv.sh bin/multi-git.sh bin/setup-*.sh
+	shellcheck bin/clone-repos.sh bin/multi-git.sh
+	shellcheck bin/install-netbird.sh bin/install-starship.sh bin/install-tenv.sh
+	shellcheck bin/setup-*.sh
 
 lintyaml:
 	yamllint -c etc/yamllint template/*.yml
