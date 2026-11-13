@@ -40,14 +40,16 @@ if $do_apps; then
 	brew install python3 ruff uv
 	brew install jq yamllint yq
 	brew install gnupg pass pinentry-mac
+
+	cp "$base/etc/ghossty.cfg" ~/"Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 fi
 
 if $do_dirs; then
 	mkdir -p ~/.aws ~/.ssh/cfg.d ~/.ssh/keys/github ~/bin ~/etc ~/etc/bash.d ~/src ~/tmp ~/work
-	cp "$base/etc/bash.d/cabtech.sh" ~/etc/bash.d
-	cp "$base/etc/bash.d/core.sh"    ~/etc/bash.d
-	cp "$base/etc/bash.d/git.sh"     ~/etc/bash.d
-	cp "$base/etc/bash.d/macos.sh"   ~/etc/bash.d
+	ln -s "$base/etc/bash.d/cabtech.sh" ~/etc/bash.d
+	ln -s "$base/etc/bash.d/core.sh"    ~/etc/bash.d
+	ln -s "$base/etc/bash.d/git.sh"     ~/etc/bash.d
+	ln -s "$base/etc/bash.d/macos.sh"   ~/etc/bash.d
 
 	idem="133f23ee-5617-4082-9e1f-c78167e89b75"
 	grep -q ${idem} ~/.zshrc
